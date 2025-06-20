@@ -1,46 +1,170 @@
-# Getting Started with Create React App
+# LaredoCarAccident.com
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A comprehensive, bilingual React application for a car accident medical center in Laredo, Texas. Built with accessibility, SEO, and performance in mind.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- 🌐 **Bilingual Support**: Full English/Spanish translation with react-i18next
+- ♿ **Accessibility**: WCAG 2.1 AA compliant with screen reader support
+- 📱 **Responsive Design**: Mobile-first approach with progressive enhancement
+- 🚀 **Performance Optimized**: Code splitting, lazy loading, and optimized assets
+- 📝 **Multi-step Forms**: Patient and attorney intake forms with validation
+- 📖 **Expandable Blog**: In-page article expansion with search and filtering
+- 🔍 **SEO Optimized**: Schema markup, meta tags, and structured data
+- 🏥 **HIPAA Compliant**: Secure form handling and data protection
 
-### `npm start`
+## Technology Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **Frontend**: React 18+ with TypeScript
+- **Styling**: Styled Components with CSS Variables
+- **Animation**: Framer Motion
+- **Forms**: React Hook Form with validation
+- **Internationalization**: react-i18next
+- **Build Tool**: Create React App
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js 16+ 
+- npm or yarn
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+# Clone the repository
+git clone <repository-url>
+cd laredo-car-accident
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Install dependencies
+npm install
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Start development server
+npm start
+```
 
-### `npm run eject`
+The application will be available at `http://localhost:3000`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Available Scripts
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- `npm start` - Runs the app in development mode
+- `npm run build` - Builds the app for production
+- `npm test` - Launches the test runner
+- `npm run eject` - Ejects from Create React App (one-way operation)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Project Structure
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+src/
+├── components/
+│   ├── common/          # Reusable UI components
+│   ├── layout/          # Header, Footer, Navigation
+│   ├── sections/        # Page sections (Hero, Services, etc.)
+│   ├── blog/           # Blog expansion components
+│   └── forms/          # Multi-step form components
+├── hooks/              # Custom React hooks
+├── i18n/              # Translation files
+├── styles/            # Global styles and variables
+├── utils/             # Helper functions
+└── services/          # API and data handling
+```
 
-## Learn More
+## Key Components
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Multi-step Forms
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **PatientModal**: 3-step patient intake form
+- **AttorneyModal**: 3-step attorney referral form
+- Both include real-time validation and accessibility features
+
+### Blog System
+
+- Expandable articles with search and filtering
+- Categories: Treatment, Legal, Recovery
+- Smooth animations and accessibility support
+
+### SEO Features
+
+- Dynamic meta tags with language support
+- Schema.org structured data for medical practice
+- Local business optimization
+- Canonical URLs and hreflang tags
+
+## Accessibility Features
+
+- Semantic HTML structure
+- ARIA labels and roles
+- Keyboard navigation support
+- Screen reader compatibility
+- High contrast color ratios
+- Focus management in modals
+
+## Performance Optimizations
+
+- Component lazy loading
+- Image optimization
+- Code splitting by route
+- CSS-in-JS with styled-components
+- Font optimization
+
+## Deployment
+
+### Production Build
+
+```bash
+npm run build
+```
+
+This creates an optimized production build in the `build/` folder.
+
+### Environment Variables
+
+Create a `.env` file for environment-specific configuration:
+
+```
+REACT_APP_API_URL=your_api_url
+REACT_APP_GOOGLE_ANALYTICS_ID=your_ga_id
+```
+
+## Content Management
+
+### Adding Blog Articles
+
+Blog articles are currently defined in `src/components/sections/Blog.tsx`. In a production environment, these would typically come from a CMS or API.
+
+### Translation Updates
+
+Update translation files in `src/i18n/`:
+- `en.json` - English translations
+- `es.json` - Spanish translations
+
+### SEO Content
+
+Update SEO content in the `useSEO` hook calls within components.
+
+## Browser Support
+
+- Chrome 88+
+- Firefox 85+
+- Safari 14+
+- Edge 88+
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## License
+
+This project is proprietary and confidential.
+
+## Contact
+
+For questions or support, contact the development team.
+
+---
+
+Built with ❤️ for the Laredo community

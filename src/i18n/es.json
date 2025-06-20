@@ -1,0 +1,228 @@
+{
+  "navigation": {
+    "home": "Inicio",
+    "services": "Servicios",
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "blog": "Recursos",
+    "emergencyContact": "Emergencia: (956) 333-2727",
+    "languageToggle": "English"
+  },
+  "hero": {
+    "title": "Tratamiento Experto para Accidentes Automovilísticos en Laredo, Texas",
+    "subtitle": "Atención Médica Integral para Lesiones de Accidentes de Vehículos",
+    "description": "En el Centro Médico de Accidentes Automovilísticos de Laredo, nos especializamos en brindar tratamiento médico inmediato e integral para lesiones de accidentes automovilísticos. Nuestro equipo experimentado ofrece atención quiropráctica, manejo del dolor e imágenes diagnósticas avanzadas para ayudarle a recuperarse rápida y completamente. Trabajamos directamente con abogados y compañías de seguros, incluyendo arreglos de Carta de Protección (LOP), para que pueda enfocarse en su recuperación sin preocuparse por los costos iniciales.",
+    "trustSignals": {
+      "experience": "15+ Años de Experiencia",
+      "bilingual": "Personal Bilingüe",
+      "insurance": "Seguros Aceptados",
+      "lop": "LOP Disponible"
+    },
+    "cta": {
+      "primary": "Recibir Tratamiento Ahora",
+      "secondary": "Consulta Gratuita",
+      "emergency": "¿Emergencia? Llame Ahora"
+    }
+  },
+  "services": {
+    "title": "Servicios Médicos Integrales para Accidentes Automovilísticos",
+    "subtitle": "Tratamiento Especializado para Lesiones de Accidentes de Vehículos",
+    "overview": "Nuestro centro médico proporciona atención completa para lesiones de accidentes automovilísticos, desde la evaluación inicial hasta la recuperación completa. Entendemos las complejidades físicas, emocionales y legales de los accidentes de vehículos, por lo que ofrecemos servicios médicos integrales diseñados específicamente para víctimas de accidentes en Laredo y áreas circundantes.",
+    "chiropractic": {
+      "title": "Atención Quiropráctica",
+      "subtitle": "Alineación Espinal y Recuperación de Lesiones",
+      "preview": "Tratamiento quiropráctico experto para latigazo cervical, dolor de espalda y lesiones espinales resultantes de accidentes automovilísticos.",
+      "content": "Nuestro programa integral de atención quiropráctica está específicamente diseñado para víctimas de accidentes automovilísticos que experimentan lesiones espinales, latigazo cervical y trauma musculoesquelético relacionado. Los accidentes automovilísticos a menudo causan movimientos súbitos y forzados que pueden desalinear la columna vertebral, dañar tejidos blandos y crear patrones de dolor tanto inmediatos como a largo plazo.\n\nNuestro enfoque diagnóstico comienza con un examen exhaustivo que incluye pruebas ortopédicas y neurológicas, radiografías digitales cuando sea necesario, y análisis detallado del movimiento. Evaluamos no solo los sitios de lesión obvios, sino también los patrones compensatorios que pueden desarrollarse mientras su cuerpo se adapta al dolor y la disfunción.\n\nLas metodologías de tratamiento incluyen ajustes espinales de precisión utilizando técnicas manuales e instrumentales, terapias de tejidos blandos incluyendo liberación miofascial y terapia de puntos gatillo, y ejercicios correctivos diseñados para restaurar patrones de movimiento adecuados y prevenir lesiones futuras.\n\nNuestros resultados de recuperación se mejoran a través de la educación del paciente sobre postura adecuada, ergonomía y técnicas de cuidado en casa. Trabajamos estrechamente con los pacientes para desarrollar planes de tratamiento personalizados que aborden sus patrones específicos de lesión, factores de estilo de vida y objetivos de recuperación. La mayoría de los pacientes experimentan mejoras significativas dentro del primer mes de tratamiento, con recuperación completa típicamente lograda dentro de 3-6 meses dependiendo de la severidad de la lesión.\n\nMantenemos documentación detallada de todos los tratamientos y progreso, lo cual es esencial para reclamaciones de seguros y procedimientos legales. Nuestro equipo coordina estrechamente con abogados y ajustadores de seguros para asegurar documentación apropiada y apoyo para su caso."
+    },
+    "painManagement": {
+      "title": "Manejo del Dolor",
+      "subtitle": "Soluciones Avanzadas para el Alivio del Dolor",
+      "preview": "Manejo integral del dolor para dolor agudo y crónico resultante de accidentes de vehículos.",
+      "content": "Nuestro programa de manejo del dolor aborda condiciones de dolor tanto agudo como crónico resultantes de accidentes de vehículos. Entendemos que las lesiones de accidentes automovilísticos pueden crear patrones de dolor complejos que afectan múltiples sistemas del cuerpo, requiriendo enfoques de tratamiento sofisticados adaptados a las necesidades específicas de cada paciente.\n\nNuestro proceso integral de evaluación del dolor incluye documentación detallada del historial de dolor, examen físico con enfoque en desencadenantes y patrones de dolor, evaluación de movimiento funcional, y evaluación psicológica cuando el dolor crónico impacta las actividades diarias. Utilizamos escalas de dolor validadas y medidas de resultados funcionales para rastrear el progreso y ajustar los planes de tratamiento según corresponda.\n\nLos procedimientos intervencionistas disponibles incluyen inyecciones en puntos gatillo para tensión muscular y espasmo, inyecciones epidurales de esteroides para dolor relacionado con discos, inyecciones en articulaciones facetarias para dolor espinal, y bloqueos nerviosos para vías de dolor específicas. Todos los procedimientos se realizan utilizando guía ultrasónica o fluoroscópica para máxima precisión y seguridad.\n\nEl manejo de medicamentos sigue protocolos basados en evidencia, enfatizando enfoques no adictivos cuando sea posible. Utilizamos medicamentos antiinflamatorios, relajantes musculares, medicamentos para dolor neuropático y analgésicos tópicos según sea apropiado. Nuestro equipo proporciona educación exhaustiva sobre efectos de medicamentos, interacciones y uso apropiado.\n\nLos componentes de rehabilitación incluyen coordinación de fisioterapia, referencias de terapia ocupacional cuando sea necesario, y desarrollo de programas de ejercicios en casa. Enfatizamos enfoques de recuperación activa que ayudan a los pacientes a recuperar la función mientras manejan el dolor efectivamente.\n\nNuestro enfoque multidisciplinario asegura que todos los aspectos del manejo del dolor sean abordados, desde alivio inmediato hasta estrategias de recuperación a largo plazo. Trabajamos con compañías de seguros y equipos legales para asegurar documentación y justificación apropiada para todos los tratamientos proporcionados."
+    },
+    "diagnosticImaging": {
+      "title": "Imágenes Diagnósticas",
+      "subtitle": "Servicios Avanzados de Imágenes Médicas",
+      "preview": "Imágenes diagnósticas de última generación incluyendo rayos X, resonancias magnéticas y tomografías para evaluación precisa de lesiones.",
+      "content": "Nuestros servicios avanzados de imágenes diagnósticas proporcionan evaluación integral de lesiones de accidentes automovilísticos utilizando tecnología de última generación y protocolos especializados diseñados específicamente para evaluación de trauma. El diagnóstico preciso es crucial para la planificación efectiva del tratamiento y documentación legal.\n\nNuestras capacidades tecnológicas incluyen sistemas de rayos X digitales con disponibilidad inmediata de imágenes y resolución de detalle mejorada, servicios de resonancia magnética con sistemas abiertos y cerrados para comodidad del paciente, tomografía computarizada para evaluación compleja de trauma, y ultrasonido para evaluación de tejidos blandos y articulaciones. Todas las imágenes son realizadas por tecnólogos certificados con entrenamiento especializado en imágenes de trauma.\n\nLos protocolos especializados para lesiones de accidentes automovilísticos incluyen imágenes de columna cervical con vistas de flexión-extensión, evaluación de columna torácica y lumbar con atención a lesiones de disco y ligamento, imágenes cerebrales cuando se sospecha conmoción cerebral, e imágenes articulares para fracturas sospechadas o daño de ligamentos. Seguimos pautas médicas establecidas para imágenes de trauma mientras adaptamos protocolos a las necesidades individuales del paciente.\n\nLa coordinación de seguros incluye asistencia de preautorización, facturación directa a compañías de seguros y abogados, reportes detallados para documentación legal, y coordinación con médicos referentes y especialistas. Nuestro personal tiene amplia experiencia trabajando con reclamaciones de accidentes de vehículos y entiende los requisitos de documentación para resolución exitosa de casos.\n\nLa excelencia en reportes incluye reportes escritos detallados dentro de 24-48 horas, comunicación directa con médicos tratantes, entrega digital de imágenes a abogados y compañías de seguros, y disponibilidad para testimonio o deposición cuando sea requerido. Todos los reportes se preparan con atención a precisión médica y requisitos legales.\n\nNuestro centro de imágenes mantiene acreditación completa y sigue todos los protocolos de seguridad. Proporcionamos servicio profesional y cómodo con atención a la comodidad del paciente y manejo de ansiedad. Citas de imágenes el mismo día y de emergencia están disponibles para casos urgentes.\n\nLa combinación de tecnología avanzada, experiencia especializada y reportes integrales hace que nuestros servicios de imágenes diagnósticas sean un componente esencial de la atención médica integral para accidentes automovilísticos en Laredo."
+    }
+  },
+  "about": {
+    "title": "Acerca del Centro Médico de Accidentes Automovilísticos de Laredo",
+    "subtitle": "Dedicados a Su Recuperación y Éxito Legal",
+    "content": "El Centro Médico de Accidentes Automovilísticos de Laredo ha estado sirviendo a la comunidad de Laredo por más de 15 años, especializándose exclusivamente en el tratamiento de lesiones de accidentes de vehículos. Nuestro equipo de profesionales médicos experimentados entiende los desafíos únicos que enfrentan las víctimas de accidentes automovilísticos, desde necesidades médicas inmediatas hasta consideraciones de recuperación y legales a largo plazo.\n\nNuestro personal profesional incluye médicos certificados por la junta, quiroprácticos licenciados, fisioterapeutas certificados y personal de apoyo bilingüe que entiende las necesidades culturales de nuestra comunidad diversa. Todos los proveedores mantienen certificaciones actuales y participan en educación continua enfocada en tratamiento de trauma y manejo de lesiones por accidentes.\n\nNos especializamos en tratamiento de lesiones de accidentes automovilísticos con amplia experiencia en latigazo cervical, lesiones espinales, trauma de tejidos blandos y evaluación de lesiones cerebrales traumáticas. Nuestro equipo está entrenado en los últimos protocolos de tratamiento basados en evidencia y mantiene relaciones con especialistas para casos complejos que requieren experiencia adicional.\n\nLa participación comunitaria es central a nuestra misión. Participamos en programas locales de educación sobre seguridad, patrocinamos eventos de salud comunitaria y mantenemos asociaciones con servicios de emergencia locales y hospitales. Nuestro compromiso con Laredo se extiende más allá del tratamiento médico para incluir educación comunitaria y prevención de lesiones.\n\nNuestras instalaciones cuentan con equipo médico de última generación, salas de tratamiento cómodas diseñadas para privacidad del paciente, capacidades de imágenes digitales e instalaciones completamente accesibles que cumplen con los requisitos de ADA. Mantenemos los más altos estándares de limpieza y protocolos de seguridad.\n\nLas capacidades bilingües de nuestro personal aseguran comunicación efectiva con todos los pacientes. Proporcionamos servicios de interpretación, documentos traducidos y atención culturalmente sensible que respeta los valores y preferencias de nuestra población diversa de pacientes.",
+    "credentials": {
+      "title": "Credenciales Profesionales",
+      "items": [
+        "Médicos Certificados por la Junta",
+        "Quiroprácticos Licenciados",
+        "Fisioterapeutas Certificados",
+        "Personal Médico Bilingüe",
+        "15+ Años de Experiencia",
+        "Certificados en Educación Continua"
+      ]
+    }
+  },
+  "contact": {
+    "title": "Contáctenos para Atención Inmediata",
+    "subtitle": "Múltiples Formas de Comunicarse con Nuestro Equipo Médico",
+    "address": {
+      "title": "Nuestra Ubicación",
+      "street": "8511 McPherson Road, Suite 208",
+      "city": "Laredo, TX 78045",
+      "phone": "(956) 333-2727",
+      "emergency": "Línea de Emergencia: (956) 333-2727",
+      "hours": {
+        "title": "Horarios de Atención",
+        "weekdays": "Lunes - Viernes: 8:00 AM - 6:00 PM",
+        "saturday": "Sábado: 9:00 AM - 2:00 PM",
+        "sunday": "Domingo: Solo Emergencias",
+        "emergency": "Servicio de Emergencia 24/7 Disponible"
+      }
+    },
+    "contact": {
+      "title": "Manténgase en Contacto",
+      "phone": "Llamar: (956) 333-2727",
+      "text": "Texto: (956) 333-2727",
+      "email": "Email: info@laredocaraccident.com",
+      "emergency": "Emergencia: Disponible 24/7"
+    },
+    "cta": {
+      "patient": "Programar Consulta de Paciente",
+      "attorney": "Formulario de Referencia de Abogado",
+      "emergency": "Contacto de Emergencia"
+    }
+  },
+  "blog": {
+    "title": "Recursos Educativos",
+    "subtitle": "Información Experta sobre Lesiones y Tratamiento de Accidentes Automovilísticos",
+    "searchPlaceholder": "Buscar artículos...",
+    "filterAll": "Todos los Temas",
+    "filterTreatment": "Opciones de Tratamiento",
+    "filterLegal": "Proceso Legal",
+    "filterRecovery": "Consejos de Recuperación",
+    "readMore": "Leer Artículo Completo",
+    "readLess": "Mostrar Menos"
+  },
+  "forms": {
+    "patient": {
+      "title": "Formulario de Admisión de Paciente",
+      "subtitle": "Ayúdenos a Brindar la Mejor Atención para Sus Lesiones por Accidente",
+      "step1": {
+        "title": "Información de Contacto",
+        "firstName": "Nombre",
+        "lastName": "Apellido",
+        "phone": "Número de Teléfono",
+        "email": "Dirección de Email (Opcional)",
+        "preferredLanguage": "Idioma Preferido",
+        "languages": {
+          "english": "Inglés",
+          "spanish": "Español",
+          "both": "Ambos"
+        }
+      },
+      "step2": {
+        "title": "Detalles del Accidente",
+        "accidentDate": "Fecha del Accidente",
+        "accidentTime": "Hora del Accidente",
+        "location": "Ubicación del Accidente",
+        "circumstances": "Circunstancias del Accidente",
+        "vehicleInfo": "Información del Vehículo",
+        "damageDescription": "Descripción del Daño",
+        "policeReport": "Número de Reporte Policial",
+        "insurance": "Información del Seguro"
+      },
+      "step3": {
+        "title": "Evaluación de Lesiones",
+        "painLocation": "Ubicación del Dolor",
+        "symptoms": "Descripción de Síntomas",
+        "medicalHistory": "Historial Médico",
+        "treatmentPreferences": "Preferencias de Tratamiento",
+        "attorneyRepresentation": "Representación de Abogado",
+        "hasAttorney": "¿Tiene un abogado?",
+        "attorneyName": "Nombre del Abogado",
+        "attorneyPhone": "Teléfono del Abogado"
+      }
+    },
+    "attorney": {
+      "title": "Formulario de Referencia de Abogado",
+      "subtitle": "Coordine la Atención para Su Cliente",
+      "step1": {
+        "title": "Información del Bufete Legal",
+        "firmName": "Nombre del Bufete Legal",
+        "attorneyName": "Nombre del Abogado",
+        "phone": "Número de Teléfono",
+        "email": "Dirección de Email",
+        "licenseNumber": "Número de Licencia del Colegio de Abogados"
+      },
+      "step2": {
+        "title": "Información del Cliente",
+        "clientName": "Nombre del Cliente",
+        "clientPhone": "Teléfono del Cliente",
+        "caseNumber": "Número de Caso",
+        "accidentDate": "Fecha del Accidente",
+        "documentation": "Documentación Disponible"
+      },
+      "step3": {
+        "title": "Preferencias de Coordinación",
+        "lopRequest": "Carta de Protección Solicitada",
+        "reportingFrequency": "Frecuencia de Reportes",
+        "communicationPreferences": "Preferencias de Comunicación",
+        "specialInstructions": "Instrucciones Especiales"
+      }
+    },
+    "validation": {
+      "required": "Este campo es requerido",
+      "invalidEmail": "Por favor ingrese una dirección de email válida",
+      "invalidPhone": "Por favor ingrese un número de teléfono válido",
+      "nameLength": "El nombre debe tener entre 2 y 30 caracteres"
+    },
+    "buttons": {
+      "next": "Siguiente Paso",
+      "previous": "Paso Anterior",
+      "submit": "Enviar Formulario",
+      "cancel": "Cancelar"
+    }
+  },
+  "footer": {
+    "contact": {
+      "title": "Información de Contacto",
+      "address": "8511 McPherson Road, Suite 208, Laredo, TX 78045",
+      "phone": "(956) 333-2727",
+      "email": "info@laredocaraccident.com"
+    },
+    "services": {
+      "title": "Nuestros Servicios",
+      "chiropractic": "Atención Quiropráctica",
+      "painManagement": "Manejo del Dolor",
+      "diagnosticImaging": "Imágenes Diagnósticas",
+      "consultation": "Consulta Gratuita"
+    },
+    "legal": {
+      "title": "Información Importante",
+      "disclaimer": "Descargo de Responsabilidad Médica",
+      "privacy": "Política de Privacidad",
+      "hipaa": "Aviso HIPAA",
+      "terms": "Términos de Servicio"
+    },
+    "social": {
+      "title": "Síguenos",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "linkedin": "LinkedIn"
+    },
+    "copyright": "© 2024 Centro Médico de Accidentes Automovilísticos de Laredo. Todos los derechos reservados.",
+    "disclaimerText": "Este sitio web es solo para fines informativos y no constituye consejo médico. Siempre consulte con un proveedor de atención médica calificado para diagnóstico médico y tratamiento."
+  },
+  "accessibility": {
+    "skipToMain": "Saltar al contenido principal",
+    "skipToNavigation": "Saltar a la navegación",
+    "openMenu": "Abrir menú de navegación",
+    "closeMenu": "Cerrar menú de navegación",
+    "openModal": "Abrir modal",
+    "closeModal": "Cerrar modal",
+    "loading": "Cargando...",
+    "error": "Ocurrió un error",
+    "success": "Éxito"
+  }
+}
