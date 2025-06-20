@@ -1,3 +1,33 @@
-# https://www.robotstxt.org/robotstxt.html
+# Robots.txt for LaredoCarAccident.com
+# Optimized for medical practice SEO
+
 User-agent: *
-Disallow:
+Allow: /
+
+# High-value pages for indexing
+Allow: /
+Allow: /blog/*
+Allow: /services/*
+
+# Prevent indexing of admin/form processing
+Disallow: /admin/
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /private/
+
+# Sitemap location
+Sitemap: https://laredocaraccident.com/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Specific bot instructions
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Medical content guidelines
+# This site provides medical information for educational purposes
+# Always consult with qualified healthcare providers for medical advice

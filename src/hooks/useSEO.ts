@@ -7,12 +7,69 @@ interface SEOProps {
   lang: string;
   image?: string;
   url?: string;
+  articleData?: {
+    author?: string;
+    publishDate?: string;
+    modifiedDate?: string;
+    section?: string;
+    tags?: string[];
+  };
+  breadcrumbs?: Array<{
+    name: string;
+    url: string;
+  }>;
 }
 
-export const useSEO = ({ title, description, keywords, lang, image, url }: SEOProps) => {
+export const useSEO = ({ title, description, keywords, lang, image, url, articleData, breadcrumbs }: SEOProps) => {
   useEffect(() => {
     // Set document title
     document.title = title;
+
+    // Add favicon package
+    const addFavicons = () => {
+      const favicon16 = document.querySelector('link[rel="icon"][sizes="16x16"]') || document.createElement('link');
+      favicon16.setAttribute('rel', 'icon');
+      favicon16.setAttribute('type', 'image/png');
+      favicon16.setAttribute('sizes', '16x16');
+      favicon16.setAttribute('href', '/favicons/favicon-16x16.png');
+      if (!document.head.contains(favicon16)) document.head.appendChild(favicon16);
+
+      const favicon32 = document.querySelector('link[rel="icon"][sizes="32x32"]') || document.createElement('link');
+      favicon32.setAttribute('rel', 'icon');
+      favicon32.setAttribute('type', 'image/png');
+      favicon32.setAttribute('sizes', '32x32');
+      favicon32.setAttribute('href', '/favicons/favicon-32x32.png');
+      if (!document.head.contains(favicon32)) document.head.appendChild(favicon32);
+
+      const appleTouchIcon = document.querySelector('link[rel="apple-touch-icon"]') || document.createElement('link');
+      appleTouchIcon.setAttribute('rel', 'apple-touch-icon');
+      appleTouchIcon.setAttribute('sizes', '180x180');
+      appleTouchIcon.setAttribute('href', '/favicons/apple-touch-icon.png');
+      if (!document.head.contains(appleTouchIcon)) document.head.appendChild(appleTouchIcon);
+
+      const manifest = document.querySelector('link[rel="manifest"]') || document.createElement('link');
+      manifest.setAttribute('rel', 'manifest');
+      manifest.setAttribute('href', '/favicons/site.webmanifest');
+      if (!document.head.contains(manifest)) document.head.appendChild(manifest);
+
+      const maskIcon = document.querySelector('link[rel="mask-icon"]') || document.createElement('link');
+      maskIcon.setAttribute('rel', 'mask-icon');
+      maskIcon.setAttribute('href', '/favicons/safari-pinned-tab.svg');
+      maskIcon.setAttribute('color', '#2C5AA0');
+      if (!document.head.contains(maskIcon)) document.head.appendChild(maskIcon);
+
+      const msconfig = document.querySelector('meta[name="msapplication-config"]') || document.createElement('meta');
+      msconfig.setAttribute('name', 'msapplication-config');
+      msconfig.setAttribute('content', '/favicons/browserconfig.xml');
+      if (!document.head.contains(msconfig)) document.head.appendChild(msconfig);
+
+      const themeColor = document.querySelector('meta[name="theme-color"]') || document.createElement('meta');
+      themeColor.setAttribute('name', 'theme-color');
+      themeColor.setAttribute('content', '#2C5AA0');
+      if (!document.head.contains(themeColor)) document.head.appendChild(themeColor);
+    };
+
+    addFavicons();
 
     // Set or update meta tags
     const updateMetaTag = (name: string, content: string, attribute: string = 'name') => {
