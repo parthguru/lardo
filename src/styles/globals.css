@@ -1,6 +1,7 @@
-/* Global Design System - LaredoCarAccident.com */
+/* Import Modern Design System */
+@import url('./designSystem.css');
 
-/* CSS Custom Properties - Design System Variables */
+/* Legacy Global Styles - To be refactored */
 :root {
   /* Primary Colors */
   --color-primary-blue: #2C5AA0;

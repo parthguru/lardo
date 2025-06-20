@@ -3,9 +3,12 @@ import { useTranslation } from 'react-i18next';
 import './styles/globals.css';
 import './i18n/index';
 
-// Components
-import Header from './components/layout/Header';
-import Hero from './components/sections/Hero';
+// Modern Components
+import ModernHeader from './components/layout/ModernHeader';
+import ModernHero from './components/sections/ModernHero';
+// Legacy Components (to be replaced)
+// import Header from './components/layout/Header';
+// import Hero from './components/sections/Hero';
 import Services from './components/sections/Services';
 import Blog from './components/sections/Blog';
 import About from './components/sections/About';
@@ -57,10 +60,10 @@ const App: React.FC = () => {
         {i18n.language === 'es' ? 'Saltar a la navegación' : 'Skip to navigation'}
       </a>
 
-      <Header />
+      <ModernHeader />
       
       <main id="main-content" role="main">
-        <Hero />
+        <ModernHero />
         <Services />
         <Blog />
         <About />
