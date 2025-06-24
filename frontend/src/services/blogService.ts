@@ -34,7 +34,7 @@ export const useBlogData = (options: UseBlogDataOptions = {}): BlogDataResult =>
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [total, setTotal] = useState(0);
-  const [useFallback, setUseFallback] = useState(false);
+  const [, setUseFallback] = useState(false);
 
   const strapiApi = useStrapiApi();
 

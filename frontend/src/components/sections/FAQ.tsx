@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Container, Flex } from '../common/UIComponents';
+import { Container } from '../common/UIComponents';
 import StructuredData from '../seo/StructuredData';
 
 const FAQSection = styled.section`
@@ -293,7 +293,6 @@ const fallbackFAQs: FAQItem[] = [
 ];
 
 const FAQ: React.FC = () => {
-  const { t } = useTranslation();
   const [openItems, setOpenItems] = useState<Set<string>>(new Set());
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [faqs, setFaqs] = useState<FAQItem[]>(fallbackFAQs);

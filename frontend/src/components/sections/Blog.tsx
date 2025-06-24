@@ -503,7 +503,7 @@ const Blog: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   // Use the new blog data service
-  const { articles, categories, loading, error, total, hasNextPage, refresh } = useBlogData({
+  const { articles, categories, loading, error, total } = useBlogData({
     searchTerm,
     categoryFilter,
     page: currentPage,

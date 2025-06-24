@@ -144,13 +144,11 @@ class StrapiApiService {
     sort?: string;
   } = {}): Promise<{ articles: BlogArticle[]; total: number; page: number; pageSize: number }> {
     const {
-      locale = 'en',
       search,
       category,
       featured,
       page = 1,
-      pageSize = 10,
-      sort = 'publishDate:desc'
+      pageSize = 10
     } = params;
 
     try {
