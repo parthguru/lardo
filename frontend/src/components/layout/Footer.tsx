@@ -300,51 +300,8 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <h4>Sitemap</h4>
             <ul>
               <li>
-                <a href="#home" onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' });
-                }}>
-                  🏠 Home
-                </a>
-              </li>
-              <li>
-                <a href="#services" onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
-                }}>
-                  🏥 Services
-                </a>
-              </li>
-              <li>
-                <a href="#blog" onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('blog')?.scrollIntoView({ behavior: 'smooth' });
-                }}>
-                  📖 Blog
-                </a>
-              </li>
-              <li>
-                <a href="#faq" onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' });
-                }}>
-                  ❓ FAQ
-                </a>
-              </li>
-              <li>
-                <a href="#about" onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-                }}>
-                  ℹ️ About
-                </a>
-              </li>
-              <li>
-                <a href="#contact" onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                }}>
-                  📞 Contact
+                <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer">
+                  🗺️ XML Sitemap for Search Engines
                 </a>
               </li>
             </ul>
@@ -408,14 +365,18 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         <FooterBottom>
           <Copyright>
             <p>{t('footer.copyright')}</p>
-            <p style={{ marginTop: 'var(--space-sm)', fontSize: 'var(--font-size-xs)' }}>
+            <p style={{ 
+              marginTop: 'var(--space-sm)', 
+              fontSize: 'var(--font-size-xs)',
+              color: 'var(--color-white)'
+            }}>
               Powered by{' '}
               <a 
                 href="https://synectus.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 style={{ 
-                  color: 'var(--color-primary-blue-light)', 
+                  color: 'var(--color-white)', 
                   textDecoration: 'none',
                   fontWeight: 'var(--font-weight-medium)'
                 }}
