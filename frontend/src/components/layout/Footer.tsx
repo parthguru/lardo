@@ -154,6 +154,7 @@ const Copyright = styled.div`
   
   p {
     margin: 0;
+    color: var(--color-white) !important;
   }
 `;
 
@@ -296,16 +297,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </ul>
           </FooterColumn>
 
-          <FooterColumn>
-            <h4>Sitemap</h4>
-            <ul>
-              <li>
-                <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer">
-                  🗺️ XML Sitemap for Search Engines
-                </a>
-              </li>
-            </ul>
-          </FooterColumn>
+
 
           <FooterColumn>
             <h4>Legal Information</h4>
@@ -398,6 +390,9 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </a>
             <a href="#legal" onClick={(e) => { e.preventDefault(); onNavigate('legal', 'terms'); }}>
               Terms of Service
+            </a>
+            <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer">
+              Sitemap
             </a>
           </LegalLinks>
         </FooterBottom>

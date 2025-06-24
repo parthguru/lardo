@@ -4,62 +4,50 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Bilingual React/TypeScript + Strapi CMS monorepo for car accident medical center in Laredo, TX. Features multi-step forms, dynamic blog system with Strapi CMS, and comprehensive accessibility support. Built with Create React App, Styled Components, Framer Motion, react-i18next, and Strapi v5.
+Bilingual React/TypeScript medical center website for car accident treatment in Laredo, TX. Features multi-step forms, JSON-based blog system with article management tools, and comprehensive accessibility support. Built with Create React App, Styled Components, Framer Motion, and react-i18next for internationalization.
 
-## Monorepo Structure
+## Project Structure
 
 ```
 laredo-car-accident/
 ├── frontend/              # React application
-├── backend/               # Strapi CMS
-├── server.js             # Production proxy server
-├── package.json          # Root monorepo configuration
+├── tools/                 # Article management tools
+├── package.json          # Root configuration
 └── CLAUDE.md            # This file
 ```
 
 ## Development Commands
 
 ```bash
-# Monorepo commands (run from root)
-npm run dev                 # Start both frontend and Strapi concurrently
-npm run setup              # Install all dependencies and build everything
-npm run build              # Build both frontend and backend for production
-npm start                  # Start production server (serves both frontend + Strapi)
+# Development
+npm run dev                 # Start React dev server at localhost:3000
+npm run build              # Production build (creates build/ folder)
+npm test                   # Run test suite
 
-# Frontend only (run from root or frontend/)
-npm run frontend:dev       # Start React dev server at localhost:3000
-npm run frontend:build     # Production build (creates build/ folder)
-cd frontend && npm test    # Run test suite
+# Article Management
+npm run new-article         # Create new article (interactive)
+npm run batch-articles      # Create multiple articles from templates
+npm run preview-article     # Preview article before publishing
 
-# Backend/Strapi only (run from root or backend/)
-npm run backend:dev        # Start Strapi in development mode at localhost:1337
-npm run strapi:dev         # Alias for backend:dev
-npm run backend:build      # Build Strapi admin panel for production
-
-# Production deployment
-npm run start:production   # Start both Strapi and production proxy server
+# Setup
+npm run install:frontend    # Install frontend dependencies
 ```
 
 ## Architecture Overview
 
-### Content Management System
-- **Strapi CMS** in `backend/` directory provides API for blog content
-- **Content Types**: Article, Category, Author, Tag with bilingual support
-- **Admin Panel**: Available at `/admin` in production
-- **API Endpoints**: Available at `/api` with i18n support
-
-### Frontend Integration
-- **API Service**: `frontend/src/services/strapiApi.ts` handles all Strapi communication
-- **Fallback System**: Uses local data when Strapi unavailable (`fallbackData.ts`)
-- **Blog Service**: `frontend/src/services/blogService.ts` provides unified data interface
-- **Environment Config**: `frontend/.env` contains Strapi URL configuration
+### Article Management System
+- **JSON-Based**: Articles stored as JSON files in `frontend/public/data/articles/`
+- **Bilingual Support**: Each article contains English and Spanish content
+- **Article Tools**: Interactive CLI tools for creating and managing content
+- **Auto-Translation**: Basic Spanish translation for common terms
+- **SEO Optimized**: Automatic meta tags, keywords, and structured data
 
 ### Blog System Architecture
-- **Dynamic Content**: Fetched from Strapi API with search/filter/pagination
+- **Static Content**: Fast loading from CDN-served JSON files
 - **Bilingual Support**: Content automatically switches based on i18n language
-- **Fallback Mode**: Gracefully degrades to static data if Strapi unavailable
+- **Search & Filter**: Client-side filtering by category, keywords, and featured status
 - **In-Page Expansion**: Maintains original one-page design pattern
-- **Real-time Updates**: Content managed through Strapi admin panel
+- **Article Creator**: Simple tools for non-technical content creation
 
 ### Form System Architecture (Unchanged)
 - Multi-step forms using custom `useMultiStepForm` hook

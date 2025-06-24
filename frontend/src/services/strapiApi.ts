@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
-const STRAPI_BASE_URL = process.env.REACT_APP_STRAPI_URL || 'http://localhost:1337';
+// Always use fallback data - no backend needed
+const STRAPI_BASE_URL = '';
 
 export interface StrapiArticle {
   id: number;
@@ -153,7 +154,6 @@ class StrapiApiService {
 
     try {
       const response = await this.fetchFromStrapi('articles');
-      console.log('Strapi API Response:', response); // DEBUG
       
       // Handle Strapi v5 direct array response format
       let articles: BlogArticle[];
@@ -216,8 +216,6 @@ class StrapiApiService {
         articles = [];
       }
       
-      console.log('Transformed articles:', articles); // DEBUG
-      
       return {
         articles,
         total: pagination.total,
@@ -261,9 +259,7 @@ class StrapiApiService {
 
   async getCategories(locale: string = 'en'): Promise<{ key: string; label: string; color: string; icon: string }[]> {
     try {
-      // Simplified API call without complex parameters to avoid 500 error
       const response = await this.fetchFromStrapi('categories');
-      console.log('Categories API Response:', response); // DEBUG
       
       // Handle empty categories or different response formats
       const categoriesData = response.data || response || [];

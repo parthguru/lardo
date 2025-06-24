@@ -1,32 +1,19 @@
 {
-  "name": "laredo-car-accident-monorepo",
+  "name": "laredo-car-accident",
   "version": "0.1.0",
   "private": true,
-  "workspaces": [
-    "frontend",
-    "backend"
-  ],
   "scripts": {
-    "dev": "concurrently \"npm run frontend:dev\" \"npm run backend:dev\"",
-    "frontend:dev": "cd frontend && npm start",
-    "backend:dev": "cd backend && npm run develop",
-    "frontend:build": "cd frontend && npm run build",
-    "backend:build": "cd backend && npm run build",
-    "build": "npm run backend:build && npm run frontend:build",
-    "frontend:install": "cd frontend && npm install",
-    "backend:install": "cd backend && npm install",
-    "install:all": "npm run frontend:install && npm run backend:install",
-    "start:production": "concurrently \"npm run backend:start\" \"node server.js\"",
-    "start": "node server.js",
-    "backend:start": "cd backend && npm start",
-    "strapi:dev": "cd backend && npm run develop",
-    "setup": "npm run install:all && npm run build"
+    "dev": "cd frontend && npm start",
+    "build": "cd frontend && npm run build",
+    "test": "cd frontend && npm test",
+    "install:frontend": "cd frontend && npm install",
+    "new-article": "node tools/create-article.js",
+    "batch-articles": "node tools/batch-articles.js",
+    "preview-article": "node tools/preview-article.js"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2"
-  },
-  "dependencies": {
-    "express": "^5.1.0",
-    "http-proxy-middleware": "^3.0.5"
+    "inquirer": "^9.2.0",
+    "marked": "^12.0.0",
+    "turndown": "^7.1.2"
   }
 }
