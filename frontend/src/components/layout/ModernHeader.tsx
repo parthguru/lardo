@@ -398,8 +398,6 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({ className }) => {
                   <EmergencyButton 
                     as="a" 
                     href="tel:+19563332727"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
                   >
                     <Icon size="sm">📞</Icon>
                     (956) 333-2727
@@ -408,8 +406,6 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({ className }) => {
                   <LanguageToggle 
                     onClick={handleLanguageChange}
                     aria-label={`Switch to ${i18n.language === 'en' ? 'Spanish' : 'English'}`}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
                   >
                     {t('navigation.languageToggle')}
                   </LanguageToggle>

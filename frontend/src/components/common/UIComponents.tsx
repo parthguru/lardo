@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 // Modern Card Component
-export const Card = styled(motion.div)<{ variant?: 'default' | 'elevated' | 'glass' }>`
+export const Card = styled(motion.div).attrs<{ variant?: 'default' | 'elevated' | 'glass' }>({})<{ variant?: 'default' | 'elevated' | 'glass' }>`
   background: ${props => {
     switch (props.variant) {
       case 'elevated':
@@ -38,7 +38,11 @@ export const Card = styled(motion.div)<{ variant?: 'default' | 'elevated' | 'gla
 `;
 
 // Modern Button Components
-export const Button = styled(motion.button)<{ 
+export const Button = styled(motion.button).attrs<{
+  variant?: 'primary' | 'secondary' | 'ghost' | 'emergency';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+  fullWidth?: boolean;
+}>({})<{
   variant?: 'primary' | 'secondary' | 'ghost' | 'emergency';
   size?: 'sm' | 'md' | 'lg' | 'xl';
   fullWidth?: boolean;
