@@ -1,227 +1,233 @@
 {
-  "version": "1.0",
-  "lastUpdated": "2024-06-20T10:00:00Z",
-  "totalArticles": 20,
   "articles": [
     {
-      "id": "whiplash-treatment-comprehensive-guide",
-      "filename": "whiplash-treatment-comprehensive-guide.json",
+      "id": "concussion-care-recognizing-and-managing-head-injuries",
+      "title": {
+        "en": "Concussion Care: Recognizing and Managing Head Injuries",
+        "es": "conmoción cerebral Care: Recognizing and Managing Head Injuries"
+      },
+      "slug": "concussion-care-recognizing-and-managing-head-injuries",
+      "excerpt": {
+        "en": "Head injuries from car accidents require immediate attention. Learn how to recognize concussion symptoms and the importance of proper medical care.",
+        "es": "Head injuries from car accidents require immediate attention. Learn how to recognize conmoción cerebral symptoms and the importance of proper medical care."
+      },
       "category": "treatment",
-      "featured": true,
-      "publishDate": "2024-01-15",
-      "lastModified": "2024-01-15",
-      "languages": ["en", "es"],
-      "readingTime": 8,
-      "priority": 1
+      "author": {
+        "name": "Dr. Carlos Rodriguez",
+        "credentials": "MD, Emergency Medicine",
+        "specialty": "Trauma Care & Pain Management"
+      },
+      "publishedAt": "2025-06-24T23:48:41.279Z",
+      "readTime": 5,
+      "featured": false,
+      "tags": {
+        "en": [
+          "car accident treatment",
+          "injury recovery",
+          "medical care",
+          "laredo treatment",
+          "concussion",
+          "care:",
+          "recognizing",
+          "managing",
+          "head",
+          "injuries",
+          "concussions",
+          "type",
+          "traumatic",
+          "brain",
+          "injury"
+        ],
+        "es": [
+          "car accident tratamiento",
+          "injury recuperación",
+          "medical care",
+          "laredo tratamiento",
+          "conmoción cerebral",
+          "care:",
+          "recognizing",
+          "managing",
+          "head",
+          "injuries",
+          "concussions",
+          "type",
+          "traumatic",
+          "brain",
+          "injury"
+        ]
+      }
     },
     {
-      "id": "letter-of-protection-complete-process",
-      "filename": "letter-of-protection-complete-process.json",
+      "id": "back-injury-recovery-physical-therapy-and-exercises",
+      "title": {
+        "en": "Back Injury Recovery: Physical Therapy and Exercises",
+        "es": "Back Injury recuperación: Physical Therapy and Exercises"
+      },
+      "slug": "back-injury-recovery-physical-therapy-and-exercises",
+      "excerpt": {
+        "en": "Back injuries from car accidents require specialized care. Learn about effective physical therapy techniques and safe exercises for recovery.",
+        "es": "Back injuries from car accidents require specialized care. Learn about effective physical therapy techniques and safe exercises for recuperación."
+      },
+      "category": "recovery",
+      "author": {
+        "name": "Dr. Carlos Rodriguez",
+        "credentials": "MD, Emergency Medicine",
+        "specialty": "Trauma Care & Pain Management"
+      },
+      "publishedAt": "2025-06-24T23:48:41.278Z",
+      "readTime": 7,
+      "featured": false,
+      "tags": {
+        "en": [
+          "injury recovery",
+          "rehabilitation",
+          "pain management",
+          "healing process",
+          "back",
+          "injury",
+          "recovery:",
+          "physical",
+          "therapy",
+          "exercises",
+          "injuries",
+          "among",
+          "most",
+          "serious",
+          "consequences"
+        ],
+        "es": [
+          "injury recuperación",
+          "rehabilitation",
+          "pain management",
+          "healing process",
+          "back",
+          "injury",
+          "recuperación:",
+          "physical",
+          "therapy",
+          "exercises",
+          "injuries",
+          "among",
+          "most",
+          "serious",
+          "consequences"
+        ]
+      }
+    },
+    {
+      "id": "your-rights-after-a-car-accident-a-legal-guide",
+      "title": {
+        "en": "Your Rights After a Car Accident: A Legal Guide",
+        "es": "Your Rights After a Car Accident: A legal Guide"
+      },
+      "slug": "your-rights-after-a-car-accident-a-legal-guide",
+      "excerpt": {
+        "en": "Knowing your legal rights after a car accident can protect you from insurance companies and ensure fair compensation for your injuries.",
+        "es": "Knowing your legal rights after a car accident can protect you from seguro companies and ensure fair compensación for your injuries."
+      },
       "category": "legal",
+      "author": {
+        "name": "Maria Garcia",
+        "credentials": "JD, Personal Injury Attorney",
+        "specialty": "Car Accident Claims"
+      },
+      "publishedAt": "2025-06-24T23:48:41.278Z",
+      "readTime": 6,
       "featured": true,
-      "publishDate": "2024-01-10",
-      "lastModified": "2024-01-10",
-      "languages": ["en", "es"],
-      "readingTime": 12,
-      "priority": 2
+      "tags": {
+        "en": [
+          "car accident lawyer",
+          "personal injury",
+          "insurance claim",
+          "laredo attorney",
+          "your",
+          "rights",
+          "after",
+          "accident:",
+          "legal",
+          "guide",
+          "being",
+          "involved",
+          "accident",
+          "overwhelming",
+          "especially"
+        ],
+        "es": [
+          "car accident lawyer",
+          "personal injury",
+          "seguro reclamo",
+          "laredo attorney",
+          "your",
+          "rights",
+          "after",
+          "accident:",
+          "legal",
+          "guide",
+          "being",
+          "involved",
+          "accident",
+          "overwhelming",
+          "especially"
+        ]
+      }
     },
     {
-      "id": "diagnostic-imaging-car-accident-injuries",
-      "filename": "diagnostic-imaging-car-accident-injuries.json",
+      "id": "understanding-whiplash-symptoms-treatment-and-recovery",
+      "title": {
+        "en": "Understanding Whiplash: Symptoms, Treatment, and Recovery",
+        "es": "Understanding latigazo cervical: Symptoms, tratamiento, and recuperación"
+      },
+      "slug": "understanding-whiplash-symptoms-treatment-and-recovery",
+      "excerpt": {
+        "en": "Whiplash is one of the most common car accident injuries. Learn about symptoms, treatment options, and what to expect during recovery.",
+        "es": "latigazo cervical is one of the most common car accident injuries. Learn about symptoms, tratamiento options, and what to expect during recuperación."
+      },
       "category": "treatment",
+      "author": {
+        "name": "Dr. Elena Martinez",
+        "credentials": "MD, Orthopedic Surgeon",
+        "specialty": "Spinal Injuries & Rehabilitation"
+      },
+      "publishedAt": "2025-06-24T23:48:41.276Z",
+      "readTime": 8,
       "featured": true,
-      "publishDate": "2024-01-05",
-      "lastModified": "2024-01-05",
-      "languages": ["en", "es"],
-      "readingTime": 10,
-      "priority": 3
-    },
-    {
-      "id": "pain-management-strategies-recovery",
-      "filename": "pain-management-strategies-recovery.json",
-      "category": "treatment",
-      "featured": true,
-      "publishDate": "2023-12-28",
-      "lastModified": "2023-12-28",
-      "languages": ["en", "es"],
-      "readingTime": 15,
-      "priority": 4
-    },
-    {
-      "id": "recovery-timeline-what-to-expect",
-      "filename": "recovery-timeline-what-to-expect.json",
-      "category": "recovery",
-      "featured": true,
-      "publishDate": "2023-12-20",
-      "lastModified": "2023-12-20",
-      "languages": ["en", "es"],
-      "readingTime": 12,
-      "priority": 5
-    },
-    {
-      "id": "herniated-disc-treatment-options",
-      "filename": "herniated-disc-treatment-options.json",
-      "category": "treatment",
-      "featured": false,
-      "publishDate": "2023-12-15",
-      "lastModified": "2023-12-15",
-      "languages": ["en", "es"],
-      "readingTime": 11,
-      "priority": 6
-    },
-    {
-      "id": "concussion-protocols-auto-accidents",
-      "filename": "concussion-protocols-auto-accidents.json",
-      "category": "treatment",
-      "featured": false,
-      "publishDate": "2023-12-10",
-      "lastModified": "2023-12-10",
-      "languages": ["en", "es"],
-      "readingTime": 9,
-      "priority": 7
-    },
-    {
-      "id": "working-with-personal-injury-attorneys",
-      "filename": "working-with-personal-injury-attorneys.json",
-      "category": "legal",
-      "featured": false,
-      "publishDate": "2023-12-05",
-      "lastModified": "2023-12-05",
-      "languages": ["en", "es"],
-      "readingTime": 10,
-      "priority": 8
-    },
-    {
-      "id": "physical-therapy-car-accident-recovery",
-      "filename": "physical-therapy-car-accident-recovery.json",
-      "category": "recovery",
-      "featured": false,
-      "publishDate": "2023-11-30",
-      "lastModified": "2023-11-30",
-      "languages": ["en", "es"],
-      "readingTime": 13,
-      "priority": 9
-    },
-    {
-      "id": "insurance-claim-process-medical-treatment",
-      "filename": "insurance-claim-process-medical-treatment.json",
-      "category": "insurance",
-      "featured": false,
-      "publishDate": "2023-11-25",
-      "lastModified": "2023-11-25",
-      "languages": ["en", "es"],
-      "readingTime": 14,
-      "priority": 10
-    },
-    {
-      "id": "chronic-pain-management-auto-accidents",
-      "filename": "chronic-pain-management-auto-accidents.json",
-      "category": "treatment",
-      "featured": false,
-      "publishDate": "2023-11-20",
-      "lastModified": "2023-11-20",
-      "languages": ["en", "es"],
-      "readingTime": 16,
-      "priority": 11
-    },
-    {
-      "id": "return-to-work-after-car-accident",
-      "filename": "return-to-work-after-car-accident.json",
-      "category": "recovery",
-      "featured": false,
-      "publishDate": "2023-11-15",
-      "lastModified": "2023-11-15",
-      "languages": ["en", "es"],
-      "readingTime": 11,
-      "priority": 12
-    },
-    {
-      "id": "mental-health-support-during-recovery",
-      "filename": "mental-health-support-during-recovery.json",
-      "category": "recovery",
-      "featured": false,
-      "publishDate": "2023-11-10",
-      "lastModified": "2023-11-10",
-      "languages": ["en", "es"],
-      "readingTime": 12,
-      "priority": 13
-    },
-    {
-      "id": "documentation-requirements-car-accident-claims",
-      "filename": "documentation-requirements-car-accident-claims.json",
-      "category": "legal",
-      "featured": false,
-      "publishDate": "2023-11-05",
-      "lastModified": "2023-11-05",
-      "languages": ["en", "es"],
-      "readingTime": 9,
-      "priority": 14
-    },
-    {
-      "id": "safe-driving-tips-prevent-accidents",
-      "filename": "safe-driving-tips-prevent-accidents.json",
-      "category": "prevention",
-      "featured": false,
-      "publishDate": "2023-10-30",
-      "lastModified": "2023-10-30",
-      "languages": ["en", "es"],
-      "readingTime": 8,
-      "priority": 15
-    },
-    {
-      "id": "vehicle-safety-features-reduce-injury",
-      "filename": "vehicle-safety-features-reduce-injury.json",
-      "category": "prevention",
-      "featured": false,
-      "publishDate": "2023-10-25",
-      "lastModified": "2023-10-25",
-      "languages": ["en", "es"],
-      "readingTime": 10,
-      "priority": 16
-    },
-    {
-      "id": "understanding-mri-scan-results",
-      "filename": "understanding-mri-scan-results.json",
-      "category": "treatment",
-      "featured": false,
-      "publishDate": "2023-10-20",
-      "lastModified": "2023-10-20",
-      "languages": ["en", "es"],
-      "readingTime": 7,
-      "priority": 17
-    },
-    {
-      "id": "exercise-guidelines-car-accident-recovery",
-      "filename": "exercise-guidelines-car-accident-recovery.json",
-      "category": "recovery",
-      "featured": false,
-      "publishDate": "2023-10-15",
-      "lastModified": "2023-10-15",
-      "languages": ["en", "es"],
-      "readingTime": 13,
-      "priority": 18
-    },
-    {
-      "id": "choosing-right-car-accident-doctor",
-      "filename": "choosing-right-car-accident-doctor.json",
-      "category": "treatment",
-      "featured": false,
-      "publishDate": "2023-10-10",
-      "lastModified": "2023-10-10",
-      "languages": ["en", "es"],
-      "readingTime": 9,
-      "priority": 19
-    },
-    {
-      "id": "soft-tissue-injuries-comprehensive-guide",
-      "filename": "soft-tissue-injuries-comprehensive-guide.json",
-      "category": "treatment",
-      "featured": false,
-      "publishDate": "2023-10-05",
-      "lastModified": "2023-10-05",
-      "languages": ["en", "es"],
-      "readingTime": 14,
-      "priority": 20
+      "tags": {
+        "en": [
+          "car accident treatment",
+          "injury recovery",
+          "medical care",
+          "laredo treatment",
+          "understanding",
+          "whiplash:",
+          "symptoms,",
+          "treatment,",
+          "recovery",
+          "whiplash",
+          "occurs",
+          "when",
+          "your",
+          "head",
+          "suddenly"
+        ],
+        "es": [
+          "car accident tratamiento",
+          "injury recuperación",
+          "medical care",
+          "laredo tratamiento",
+          "understanding",
+          "latigazo cervical:",
+          "symptoms,",
+          "tratamiento,",
+          "recuperación",
+          "latigazo cervical",
+          "occurs",
+          "when",
+          "your",
+          "head",
+          "suddenly"
+        ]
+      }
     }
-  ]
+  ],
+  "lastUpdated": "2025-06-24T23:48:41.279Z"
 }
