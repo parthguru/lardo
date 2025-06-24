@@ -1,0 +1,24 @@
+<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2C5AA0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1E3F73;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="crossGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#28A745;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1E7E34;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="30" cy="30" r="25" fill="url(#logoGradient)" stroke="#E8F1FF" stroke-width="2"/>
+  
+  <!-- Medical cross -->
+  <rect x="26" y="18" width="8" height="24" fill="white" rx="1"/>
+  <rect x="18" y="26" width="24" height="8" fill="white" rx="1"/>
+  
+  <!-- Text -->
+  <text x="70" y="18" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="url(#logoGradient)">LAREDO</text>
+  <text x="70" y="32" font-family="Arial, sans-serif" font-size="12" font-weight="600" fill="#2C5AA0">Car Accident</text>
+  <text x="70" y="45" font-family="Arial, sans-serif" font-size="10" font-weight="500" fill="#6C757D">Medical Center</text>
+</svg> 

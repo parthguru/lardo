@@ -1,0 +1,212 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2024-06-20T10:00:00Z",
+  "settings": {
+    "articlesPerPage": 10,
+    "enableSearch": true,
+    "enableFiltering": true,
+    "enableSorting": true,
+    "defaultSort": "publishDate",
+    "sortOrder": "desc",
+    "showReadingTime": true,
+    "showAuthor": true,
+    "showPublishDate": true,
+    "enableRelatedArticles": true,
+    "maxRelatedArticles": 3,
+    "enableSocialSharing": true,
+    "enablePrintView": true
+  },
+  "categories": [
+    {
+      "id": "treatment",
+      "name": {
+        "en": "Treatment Options",
+        "es": "Opciones de Tratamiento"
+      },
+      "description": {
+        "en": "Medical treatment information and procedures",
+        "es": "Información sobre tratamientos médicos y procedimientos"
+      },
+      "color": "#2C5AA0",
+      "icon": "🏥",
+      "slug": "treatment",
+      "displayOrder": 1
+    },
+    {
+      "id": "legal",
+      "name": {
+        "en": "Legal Process",
+        "es": "Proceso Legal"
+      },
+      "description": {
+        "en": "Legal guidance and Letter of Protection information",
+        "es": "Guía legal e información sobre Carta de Protección"
+      },
+      "color": "#28A745",
+      "icon": "⚖️",
+      "slug": "legal",
+      "displayOrder": 2
+    },
+    {
+      "id": "recovery",
+      "name": {
+        "en": "Recovery Tips",
+        "es": "Consejos de Recuperación"
+      },
+      "description": {
+        "en": "Recovery and rehabilitation guidance",
+        "es": "Guía de recuperación y rehabilitación"
+      },
+      "color": "#FF6B35",
+      "icon": "💪",
+      "slug": "recovery",
+      "displayOrder": 3
+    },
+    {
+      "id": "prevention",
+      "name": {
+        "en": "Prevention",
+        "es": "Prevención"
+      },
+      "description": {
+        "en": "Safety tips and accident prevention",
+        "es": "Consejos de seguridad y prevención de accidentes"
+      },
+      "color": "#6F42C1",
+      "icon": "🛡️",
+      "slug": "prevention",
+      "displayOrder": 4
+    },
+    {
+      "id": "insurance",
+      "name": {
+        "en": "Insurance & Claims",
+        "es": "Seguros y Reclamaciones"
+      },
+      "description": {
+        "en": "Insurance process and claims guidance",
+        "es": "Proceso de seguros y guía de reclamaciones"
+      },
+      "color": "#17A2B8",
+      "icon": "📋",
+      "slug": "insurance",
+      "displayOrder": 5
+    }
+  ],
+  "authors": [
+    {
+      "id": "dr-martinez",
+      "name": "Dr. Carlos Martinez",
+      "credentials": "DC, CCSP",
+      "specialty": "Chiropractic Care",
+      "bio": {
+        "en": "Board-certified chiropractor specializing in car accident injuries with over 15 years of experience treating patients in Laredo.",
+        "es": "Quiropráctico certificado especializado en lesiones de accidentes automovilísticos con más de 15 años de experiencia tratando pacientes en Laredo."
+      },
+      "avatar": "/images/authors/dr-martinez.jpg",
+      "languages": ["en", "es"]
+    },
+    {
+      "id": "dr-rodriguez",
+      "name": "Dr. Maria Rodriguez",
+      "credentials": "MD, Pain Management",
+      "specialty": "Pain Management",
+      "bio": {
+        "en": "Pain management specialist with expertise in interventional procedures and comprehensive pain treatment for motor vehicle accident victims.",
+        "es": "Especialista en manejo del dolor con experiencia en procedimientos intervencionistas y tratamiento integral del dolor para víctimas de accidentes de vehículos."
+      },
+      "avatar": "/images/authors/dr-rodriguez.jpg",
+      "languages": ["en", "es"]
+    },
+    {
+      "id": "dr-santos",
+      "name": "Dr. Luis Santos",
+      "credentials": "MD, Diagnostic Imaging",
+      "specialty": "Diagnostic Imaging",
+      "bio": {
+        "en": "Board-certified radiologist specializing in trauma imaging and diagnostic procedures for car accident injuries.",
+        "es": "Radiólogo certificado especializado en imágenes de trauma y procedimientos diagnósticos para lesiones de accidentes automovilísticos."
+      },
+      "avatar": "/images/authors/dr-santos.jpg",
+      "languages": ["en", "es"]
+    }
+  ],
+  "tags": [
+    {
+      "id": "whiplash",
+      "name": {
+        "en": "Whiplash",
+        "es": "Latigazo Cervical"
+      },
+      "slug": "whiplash"
+    },
+    {
+      "id": "neck-injury",
+      "name": {
+        "en": "Neck Injury",
+        "es": "Lesión del Cuello"
+      },
+      "slug": "neck-injury"
+    },
+    {
+      "id": "back-pain",
+      "name": {
+        "en": "Back Pain",
+        "es": "Dolor de Espalda"
+      },
+      "slug": "back-pain"
+    },
+    {
+      "id": "concussion",
+      "name": {
+        "en": "Concussion",
+        "es": "Conmoción Cerebral"
+      },
+      "slug": "concussion"
+    },
+    {
+      "id": "letter-of-protection",
+      "name": {
+        "en": "Letter of Protection",
+        "es": "Carta de Protección"
+      },
+      "slug": "letter-of-protection"
+    },
+    {
+      "id": "insurance",
+      "name": {
+        "en": "Insurance",
+        "es": "Seguro"
+      },
+      "slug": "insurance"
+    },
+    {
+      "id": "physical-therapy",
+      "name": {
+        "en": "Physical Therapy",
+        "es": "Fisioterapia"
+      },
+      "slug": "physical-therapy"
+    },
+    {
+      "id": "diagnostic-imaging",
+      "name": {
+        "en": "Diagnostic Imaging",
+        "es": "Imágenes Diagnósticas"
+      },
+      "slug": "diagnostic-imaging"
+    }
+  ],
+  "featuredArticles": [
+    "whiplash-treatment-comprehensive-guide",
+    "letter-of-protection-complete-process",
+    "diagnostic-imaging-car-accident-injuries",
+    "pain-management-strategies-recovery",
+    "recovery-timeline-what-to-expect"
+  ],
+  "seo": {
+    "defaultMetaTitle": "Car Accident Medical Resources - Laredo Medical Center",
+    "defaultMetaDescription": "Expert medical information and resources for car accident injuries. Treatment guides, legal process information, and recovery tips from Laredo's leading medical specialists.",
+    "defaultKeywords": "car accident medical information, Laredo medical resources, injury treatment guides, legal process, recovery tips"
+  }
+}
