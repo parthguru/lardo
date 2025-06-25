@@ -16,12 +16,17 @@ export interface LocalArticle {
   };
   publishedAt: string;
   updatedAt: string;
+  lastReviewed?: string;
   readTime: number;
+  wordCount?: number;
   featured: boolean;
+  featuredImage?: string;
   tags: { en: string[]; es: string[] };
   seo: {
     en: { title: string; description: string; keywords: string };
     es: { title: string; description: string; keywords: string };
+    focusKeyword?: string;
+    localKeywords?: string;
   };
 }
 
