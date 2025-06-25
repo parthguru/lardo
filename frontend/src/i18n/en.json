@@ -119,6 +119,11 @@
       "submitting": "Sending...",
       "success": "Thank you! We'll contact you soon.",
       "error": "Please try again or call us directly."
+    },
+    "cta": {
+      "patient": "Schedule Consultation",
+      "attorney": "Refer Client",
+      "emergency": "Call Emergency Line"
     }
   },
   "accessibility": {
