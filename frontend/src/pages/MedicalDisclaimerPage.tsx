@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useSEO } from '../hooks/useSEO';
@@ -290,6 +290,11 @@ interface MedicalDisclaimerPageProps {
 }
 
 const MedicalDisclaimerPage: React.FC<MedicalDisclaimerPageProps> = ({ onNavigateHome }) => {
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
   useSEO({
     title: 'Medical Disclaimer - Laredo Car Accident Medical Center',
     description: 'Important medical disclaimer and liability information for Laredo Car Accident Medical Center. Please read carefully before using our medical services.',

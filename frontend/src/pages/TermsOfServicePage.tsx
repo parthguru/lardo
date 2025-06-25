@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useSEO } from '../hooks/useSEO';
@@ -316,6 +316,11 @@ interface TermsOfServicePageProps {
 }
 
 const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigateHome }) => {
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
   useSEO({
     title: 'Terms of Service - Laredo Car Accident Medical Center',
     description: 'Terms of Service governing the use of our website and medical services at Laredo Car Accident Medical Center. Please read carefully.',

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useSEO } from '../hooks/useSEO';
@@ -288,6 +288,11 @@ interface PrivacyPolicyPageProps {
 }
 
 const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigateHome }) => {
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
   useSEO({
     title: 'Privacy Policy - Laredo Car Accident Medical Center',
     description: 'Our comprehensive privacy policy explaining how we collect, use, and protect your personal and medical information at Laredo Car Accident Medical Center.',

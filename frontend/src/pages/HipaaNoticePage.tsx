@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useSEO } from '../hooks/useSEO';
@@ -316,6 +316,11 @@ interface HipaaNoticePageProps {
 }
 
 const HipaaNoticePage: React.FC<HipaaNoticePageProps> = ({ onNavigateHome }) => {
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
   useSEO({
     title: 'HIPAA Notice of Privacy Practices - Laredo Car Accident Medical Center',
     description: 'Notice of Privacy Practices under HIPAA explaining how your medical information is used, disclosed, and protected at Laredo Car Accident Medical Center.',
