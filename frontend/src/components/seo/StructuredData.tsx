@@ -50,7 +50,7 @@ interface PhysicianData {
 }
 
 interface StructuredDataProps {
-  type: 'localBusiness' | 'medicalProcedure' | 'physician' | 'faq' | 'article';
+  type: 'localBusiness' | 'medicalProcedure' | 'physician' | 'faq' | 'article' | 'service' | 'blog';
   data: any;
 }
 
@@ -109,7 +109,78 @@ const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
       bestRating: '5',
       worstRating: '1',
     },
-    priceRange: '$$',
+    priceRange: '$0-$500',
+    image: [
+      `${window.location.origin}/images/laredo-medical-logo.svg`,
+      `${window.location.origin}/logo512.png`,
+      `${window.location.origin}/logo192.png`
+    ],
+    logo: {
+      '@type': 'ImageObject',
+      url: `${window.location.origin}/images/laredo-medical-logo.svg`,
+      width: 160,
+      height: 48
+    },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Medical Services',
+      itemListElement: [
+        {
+          '@type': 'OfferCatalog',
+          name: 'Emergency Care',
+          itemListElement: [
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Car Accident Emergency Treatment',
+                description: 'Immediate medical care for car accident injuries'
+              },
+              price: '0',
+              priceCurrency: 'USD',
+              availability: 'InStock',
+              acceptedPaymentMethod: ['Insurance', 'LOP', 'Cash']
+            }
+          ]
+        },
+        {
+          '@type': 'OfferCatalog', 
+          name: 'Physical Therapy',
+          itemListElement: [
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Post-Accident Physical Therapy',
+                description: 'Comprehensive rehabilitation services'
+              },
+              price: '0',
+              priceCurrency: 'USD',
+              availability: 'InStock',
+              acceptedPaymentMethod: ['Insurance', 'LOP', 'Cash']
+            }
+          ]
+        },
+        {
+          '@type': 'OfferCatalog',
+          name: 'Diagnostic Services', 
+          itemListElement: [
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Medical Imaging & Diagnostics',
+                description: 'X-rays, MRI, CT scans for accident injuries'
+              },
+              price: '0',
+              priceCurrency: 'USD',
+              availability: 'InStock',
+              acceptedPaymentMethod: ['Insurance', 'LOP', 'Cash']
+            }
+          ]
+        }
+      ]
+    },
   });
 
   const generateMedicalProcedureSchema = (procedureData: MedicalProcedureData) => ({
@@ -196,6 +267,224 @@ const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
     inLanguage: 'en-US',
   });
 
+  const generateServiceSchema = (serviceData: any) => ({
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: serviceData.name || 'Car Accident Medical Services',
+    description: serviceData.description || 'Comprehensive medical care for car accident injuries in Laredo, Texas',
+    provider: {
+      '@type': 'MedicalBusiness',
+      name: 'Laredo Car Accident Medical Center',
+      url: window.location.origin,
+      telephone: '+19563332727',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: serviceData.address?.streetAddress || '1234 Medical Center Blvd',
+        addressLocality: 'Laredo',
+        addressRegion: 'TX',
+        postalCode: serviceData.address?.postalCode || '78041',
+        addressCountry: 'US'
+      },
+      image: `${window.location.origin}/images/laredo-medical-logo.svg`
+    },
+    areaServed: [
+      {
+        '@type': 'City',
+        name: 'Laredo'
+      },
+      {
+        '@type': 'AdministrativeArea', 
+        name: 'Webb County'
+      }
+    ],
+    availableChannel: {
+      '@type': 'ServiceChannel',
+      availableLanguage: ['en', 'es'],
+      serviceType: 'Emergency Medical Care',
+      serviceLocation: {
+        '@type': 'Place',
+        name: 'Laredo Car Accident Medical Center',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Laredo',
+          addressRegion: 'TX'
+        }
+      }
+    },
+    offers: [
+      {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+        description: 'Treatment covered by insurance and LOP (Letter of Protection)',
+        acceptedPaymentMethod: [
+          'http://purl.org/goodrelations/v1#ByInvoice',
+          'http://purl.org/goodrelations/v1#Cash',
+          'http://purl.org/goodrelations/v1#PayPal'
+        ],
+        availability: 'http://schema.org/InStock'
+      }
+    ],
+    serviceType: [
+      'Emergency Medical Care',
+      'Physical Therapy', 
+      'Pain Management',
+      'Diagnostic Imaging',
+      'Rehabilitation Services',
+      'Chiropractic Care'
+    ],
+    category: 'Medical Services',
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Medical Services for Car Accident Victims',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'MedicalTherapy',
+            name: 'Whiplash Treatment',
+            medicalSpecialty: 'Physical Therapy'
+          },
+          price: '0',
+          priceCurrency: 'USD'
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'MedicalTherapy', 
+            name: 'Back Injury Rehabilitation',
+            medicalSpecialty: 'Physical Therapy'
+          },
+          price: '0',
+          priceCurrency: 'USD'
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'MedicalTest',
+            name: 'X-Ray Diagnostic Imaging',
+            medicalSpecialty: 'Radiology'
+          },
+          price: '0', 
+          priceCurrency: 'USD'
+        }
+      ]
+         }
+   });
+
+  const generateBlogSchema = (blogData: any) => ({
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: blogData.name || 'Car Accident Medical Information Blog',
+    description: blogData.description || 'Expert medical advice and information about car accident injuries, treatment options, and recovery tips from Laredo Car Accident Medical Center.',
+    url: `${window.location.origin}/#blog`,
+    publisher: {
+      '@type': 'MedicalBusiness',
+      name: 'Laredo Car Accident Medical Center',
+      url: window.location.origin,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${window.location.origin}/images/laredo-medical-logo.svg`,
+        width: 160,
+        height: 48
+      },
+      telephone: '+19563332727',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '8511 McPherson Road, Suite 208',
+        addressLocality: 'Laredo',
+        addressRegion: 'TX',
+        postalCode: '78045',
+        addressCountry: 'US'
+      }
+    },
+    inLanguage: ['en-US', 'es-US'],
+    audience: {
+      '@type': 'PeopleAudience',
+      geographicArea: [
+        {
+          '@type': 'City',
+          name: 'Laredo, Texas'
+        },
+        {
+          '@type': 'AdministrativeArea',
+          name: 'Webb County, Texas'
+        }
+      ]
+    },
+    about: [
+      {
+        '@type': 'MedicalCondition',
+        name: 'Car Accident Injuries'
+      },
+      {
+        '@type': 'MedicalSpecialty',
+        name: 'Auto Injury Treatment'
+      },
+      {
+        '@type': 'MedicalTherapy',
+        name: 'Physical Therapy'
+      },
+      {
+        '@type': 'MedicalSpecialty',
+        name: 'Chiropractic Care'
+      }
+    ],
+    blogPost: blogData.articles?.map((article: any) => ({
+      '@type': 'BlogPosting',
+      headline: article.title,
+      description: article.excerpt,
+      url: `${window.location.origin}/#blog`,
+      datePublished: article.publishDate || new Date().toISOString(),
+      dateModified: article.lastReviewed || article.publishDate || new Date().toISOString(),
+      author: {
+        '@type': 'Person',
+        name: article.author?.name || 'Dr. Medical Expert',
+        jobTitle: 'Medical Professional',
+        worksFor: {
+          '@type': 'MedicalBusiness',
+          name: 'Laredo Car Accident Medical Center'
+        }
+      },
+      publisher: {
+        '@type': 'MedicalBusiness',
+        name: 'Laredo Car Accident Medical Center',
+        logo: {
+          '@type': 'ImageObject',
+          url: `${window.location.origin}/images/laredo-medical-logo.svg`
+        }
+      },
+      mainEntityOfPage: {
+        '@type': 'MedicalWebPage',
+        '@id': `${window.location.origin}/#blog`
+      },
+      image: article.featuredImage?.url || `${window.location.origin}/images/laredo-medical-logo.svg`,
+      keywords: [
+        article.focusKeyword,
+        ...(article.localKeywords?.split(',') || []),
+        'car accident medical care',
+        'Laredo medical treatment',
+        'auto injury recovery'
+      ].filter(Boolean),
+      wordCount: article.wordCount || 800,
+      about: {
+        '@type': 'MedicalCondition',
+        name: article.category || 'Car Accident Injuries'
+      },
+      audience: {
+        '@type': 'PeopleAudience',
+        geographicArea: {
+          '@type': 'City',
+          name: 'Laredo, Texas'
+        }
+      },
+      inLanguage: 'en-US',
+      isAccessibleForFree: true,
+      genre: 'Medical Information',
+      articleSection: article.category || 'Medical Treatment'
+    })) || []
+  });
+
   const getSchema = () => {
     switch (type) {
       case 'localBusiness':
@@ -208,6 +497,10 @@ const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
         return generateFAQSchema(data);
       case 'article':
         return generateArticleSchema(data);
+      case 'service':
+        return generateServiceSchema(data);
+      case 'blog':
+        return generateBlogSchema(data);
       default:
         return null;
     }

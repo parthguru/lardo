@@ -147,6 +147,16 @@ const App: React.FC = () => {
     }
   };
 
+  // Service Structured Data
+  const serviceData = {
+    name: "Car Accident Medical Services",
+    description: "Comprehensive medical care for car accident injuries including emergency treatment, physical therapy, chiropractic care, pain management, and diagnostic imaging. All services start from $0 with Letter of Protection and insurance coverage accepted.",
+    address: {
+      streetAddress: "8511 McPherson Road, Suite 208",
+      postalCode: "78045"
+    }
+  };
+
   return (
     <HelmetProvider>
       <Router>
@@ -171,6 +181,9 @@ const App: React.FC = () => {
           
           {/* Local Business Structured Data */}
           <StructuredData type="localBusiness" data={localBusinessData} />
+          
+          {/* Service Structured Data */}
+          <StructuredData type="service" data={serviceData} />
           
           {/* Skip Links for Accessibility */}
           <a href="#main-content" className="skip-link">

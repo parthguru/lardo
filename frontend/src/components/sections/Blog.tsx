@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 import { useBlogExpansion } from '../../hooks/useBlogExpansion';
 import { useLocalBlogData } from '../../services/localBlogService';
+import StructuredData from '../seo/StructuredData';
 
 const BlogSection = styled.section`
   padding: var(--space-20) 0;
@@ -639,8 +640,34 @@ const Blog: React.FC = () => {
     return buttons;
   };
 
+  // Blog Schema Data
+  const blogSchemaData = {
+    name: t('blog.title'),
+    description: t('blog.subtitle'),
+    articles: articles.map(article => ({
+      title: article.title[currentLang] || article.title.en,
+      excerpt: article.excerpt[currentLang] || article.excerpt.en,
+      publishDate: article.publishedAt,
+      lastReviewed: article.lastReviewed || article.publishedAt,
+      author: {
+        name: article.author?.name || 'Dr. Medical Expert'
+      },
+      focusKeyword: article.seo?.focusKeyword || 'car accident treatment',
+      localKeywords: article.seo?.localKeywords || 'Laredo medical care, auto injury treatment',
+      wordCount: article.wordCount || 800,
+      category: article.category,
+      featuredImage: {
+        url: article.featuredImage || '/images/laredo-medical-logo.svg'
+      }
+    }))
+  };
+
   return (
-    <BlogSection id="blog">
+    <>
+      {/* Blog Structured Data */}
+      <StructuredData type="blog" data={blogSchemaData} />
+      
+            <BlogSection id="blog">
       <Container>
         <SectionHeader>
           <motion.h2
@@ -785,6 +812,7 @@ const Blog: React.FC = () => {
         )}
       </Container>
     </BlogSection>
+    </>
   );
 };
 
