@@ -126,6 +126,86 @@
       "emergency": "Call Emergency Line"
     }
   },
+  "forms": {
+    "patient": {
+      "title": "Patient Intake Form",
+      "subtitle": "Help Us Provide the Best Care for Your Accident Injuries",
+      "step1": {
+        "title": "Contact Information",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "phone": "Phone Number",
+        "email": "Email Address (Optional)",
+        "preferredLanguage": "Preferred Language",
+        "languages": {
+          "english": "English",
+          "spanish": "Spanish",
+          "both": "Both"
+        }
+      },
+      "step2": {
+        "title": "Accident Details",
+        "accidentDate": "Accident Date",
+        "accidentTime": "Accident Time",
+        "location": "Accident Location",
+        "circumstances": "Accident Circumstances",
+        "vehicleInfo": "Vehicle Information",
+        "damageDescription": "Damage Description",
+        "policeReport": "Police Report Number",
+        "insurance": "Insurance Information"
+      },
+      "step3": {
+        "title": "Injury Assessment",
+        "painLocation": "Pain Location",
+        "symptoms": "Symptom Description",
+        "medicalHistory": "Medical History",
+        "treatmentPreferences": "Treatment Preferences",
+        "attorneyRepresentation": "Attorney Representation",
+        "hasAttorney": "Do you have an attorney?",
+        "attorneyName": "Attorney Name",
+        "attorneyPhone": "Attorney Phone"
+      }
+    },
+    "attorney": {
+      "title": "Attorney Referral Form",
+      "subtitle": "Coordinate Care for Your Client",
+      "step1": {
+        "title": "Law Firm Information",
+        "firmName": "Law Firm Name",
+        "attorneyName": "Attorney Name",
+        "phone": "Phone Number",
+        "email": "Email Address",
+        "licenseNumber": "Bar License Number"
+      },
+      "step2": {
+        "title": "Client Information",
+        "clientName": "Client Name",
+        "clientPhone": "Client Phone",
+        "caseNumber": "Case Number",
+        "accidentDate": "Accident Date",
+        "documentation": "Available Documentation"
+      },
+      "step3": {
+        "title": "Coordination Preferences",
+        "lopRequest": "Letter of Protection Requested",
+        "reportingFrequency": "Reporting Frequency",
+        "communicationPreferences": "Communication Preferences",
+        "specialInstructions": "Special Instructions"
+      }
+    },
+    "validation": {
+      "required": "This field is required",
+      "invalidEmail": "Please enter a valid email address",
+      "invalidPhone": "Please enter a valid phone number",
+      "nameLength": "Name must be between 2 and 30 characters"
+    },
+    "buttons": {
+      "next": "Next Step",
+      "previous": "Previous Step",
+      "submit": "Submit Form",
+      "cancel": "Cancel"
+    }
+  },
   "accessibility": {
     "openMenu": "Open navigation menu",
     "closeMenu": "Close navigation menu"

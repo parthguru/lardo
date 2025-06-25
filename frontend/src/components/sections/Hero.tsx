@@ -184,7 +184,7 @@ const SecondaryButton = styled.button`
 `;
 
 const EmergencyButton = styled.a`
-  background: var(--color-accent-orange);
+  background: linear-gradient(135deg, #FF6B35 0%, #e55a2b 100%);
   color: var(--color-white);
   border: none;
   padding: var(--space-md) var(--space-xl);
@@ -194,28 +194,59 @@ const EmergencyButton = styled.a`
   text-decoration: none;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-sm);
   cursor: pointer;
-  transition: all var(--transition-fast);
-  box-shadow: var(--shadow-md);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s;
+  }
 
   &:hover {
-    background: #e55a2b;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    background: linear-gradient(135deg, #e55a2b 0%, #d14d26 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.1);
     text-decoration: none;
     color: var(--color-white);
+
+    &::before {
+      left: 100%;
+    }
+  }
+
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   }
 
   &:focus {
-    outline: 2px solid var(--color-focus);
+    outline: 3px solid rgba(255, 107, 53, 0.3);
     outline-offset: 2px;
   }
 
   @media (max-width: 768px) {
     width: 100%;
     max-width: 280px;
-    justify-content: center;
+    padding: var(--space-lg) var(--space-xl);
+    font-size: var(--font-size-lg);
+  }
+
+  @media (hover: none) {
+    &:hover {
+      transform: none;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
   }
 `;
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const FooterWrapper = styled.footer`
@@ -54,7 +55,8 @@ const FooterColumn = styled.div`
     }
   }
 
-  a {
+  a, 
+  a[href] {
     color: var(--color-white);
     text-decoration: none;
     transition: color var(--transition-fast);
@@ -168,7 +170,8 @@ const LegalLinks = styled.div`
     gap: var(--space-sm);
   }
 
-  a {
+  a, 
+  a[href] {
     color: var(--color-white);
     text-decoration: none;
     font-size: var(--font-size-sm);
@@ -303,36 +306,24 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <h4>Legal Information</h4>
             <ul>
               <li>
-                <a href="#legal" onClick={(e) => {
-                  e.preventDefault();
-                  onNavigate('legal', 'medical-disclaimer');
-                }}>
+                <Link to="/medical-disclaimer">
                   📋 Medical Disclaimer
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#legal" onClick={(e) => {
-                  e.preventDefault();
-                  onNavigate('legal', 'privacy');
-                }}>
+                <Link to="/privacy-policy">
                   🔒 Privacy Policy
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#legal" onClick={(e) => {
-                  e.preventDefault();
-                  onNavigate('legal', 'hipaa');
-                }}>
+                <Link to="/hipaa-notice">
                   🏥 HIPAA Notice
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#legal" onClick={(e) => {
-                  e.preventDefault();
-                  onNavigate('legal', 'terms');
-                }}>
+                <Link to="/terms-of-service">
                   📄 Terms of Service
-                </a>
+                </Link>
               </li>
             </ul>
           </FooterColumn>
@@ -379,18 +370,18 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </Copyright>
 
           <LegalLinks>
-            <a href="#legal" onClick={(e) => { e.preventDefault(); onNavigate('legal', 'medical-disclaimer'); }}>
+            <Link to="/medical-disclaimer">
               Medical Disclaimer
-            </a>
-            <a href="#legal" onClick={(e) => { e.preventDefault(); onNavigate('legal', 'privacy'); }}>
+            </Link>
+            <Link to="/privacy-policy">
               Privacy Policy
-            </a>
-            <a href="#legal" onClick={(e) => { e.preventDefault(); onNavigate('legal', 'hipaa'); }}>
+            </Link>
+            <Link to="/hipaa-notice">
               HIPAA Notice
-            </a>
-            <a href="#legal" onClick={(e) => { e.preventDefault(); onNavigate('legal', 'terms'); }}>
+            </Link>
+            <Link to="/terms-of-service">
               Terms of Service
-            </a>
+            </Link>
             <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer">
               Sitemap
             </a>

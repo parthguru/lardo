@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button, Container, Flex, Icon } from '../common/UIComponents';
@@ -93,6 +94,7 @@ const Logo = styled(motion.div)`
   align-items: center;
   flex-shrink: 0;
   min-width: 0;
+  cursor: pointer;
 
   .logo-image {
     height: 48px;
@@ -143,8 +145,7 @@ const Navigation = styled.nav<{ isOpen: boolean }>`
     gap: var(--space-6);
     transform: translateX(${props => props.isOpen ? '0' : '100%'});
     transition: transform var(--transition-default);
-    z-index: 9999;
-    pointer-events: auto;
+    z-index: var(--z-modal);
   }
 `;
 
@@ -256,6 +257,11 @@ const LanguageToggle = styled.button`
     width: 100%;
     justify-content: center;
   }
+
+  @media (max-width: 768px) {
+    font-size: var(--font-size-xs);
+    padding: var(--space-2) var(--space-3);
+  }
 `;
 
 const MobileMenuButton = styled.button`
@@ -263,40 +269,39 @@ const MobileMenuButton = styled.button`
   background: none;
   border: none;
   font-size: var(--font-size-2xl);
-  color: var(--color-gray-700);
+  color: var(--color-gray-600);
   cursor: pointer;
   padding: var(--space-2);
   border-radius: var(--radius-lg);
   transition: var(--transition-default);
 
+  @media (max-width: 1200px) {
+    display: block;
+  }
+
   &:hover {
     background: var(--color-gray-100);
+    color: var(--color-gray-800);
   }
 
   &:focus {
     outline: none;
     box-shadow: 0 0 0 2px var(--color-primary-500);
   }
-
-  @media (max-width: 1200px) {
-    display: block;
-  }
 `;
 
 const MobileOverlay = styled(motion.div)`
-  @media (min-width: 1201px) {
-    display: none !important;
-  }
+  display: none;
 
   @media (max-width: 1200px) {
+    display: block;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.3);
-    z-index: 9998;
-    pointer-events: auto;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: var(--z-modal-backdrop);
   }
 `;
 
@@ -323,65 +328,54 @@ const CloseButton = styled.button`
   }
 `;
 
-interface ModernHeaderProps {
+interface PolicyHeaderProps {
   className?: string;
 }
 
-const ModernHeader: React.FC<ModernHeaderProps> = ({ className }) => {
+const PolicyHeader: React.FC<PolicyHeaderProps> = ({ className }) => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
 
-    const handleResize = () => {
-      const mobile = window.innerWidth <= 1200;
-      setIsMobile(mobile);
-      // Close mobile menu if we switch to desktop
-      if (!mobile && isMobileMenuOpen) {
-        setIsMobileMenuOpen(false);
-      }
-    };
-
-    // Initial check
-    handleResize();
-
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleResize);
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [isMobileMenuOpen]);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleLanguageChange = () => {
     const newLang = i18n.language === 'en' ? 'es' : 'en';
     i18n.changeLanguage(newLang);
   };
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const headerHeight = 100;
-      const elementPosition = element.offsetTop - headerHeight;
-      window.scrollTo({
-        top: elementPosition,
-        behavior: 'smooth'
-      });
-    }
+  const navigateToHome = () => {
+    navigate('/');
     setIsMobileMenuOpen(false);
   };
 
+  const navigateToHomeWithSection = (sectionId: string) => {
+    navigate('/');
+    setIsMobileMenuOpen(false);
+    // After navigation, wait for the page to load and then scroll to section
+    setTimeout(() => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const headerHeight = 100;
+        const elementPosition = element.offsetTop - headerHeight;
+        window.scrollTo({
+          top: elementPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 100);
+  };
+
   const toggleMobileMenu = () => {
-    // Only allow mobile menu on mobile devices
-    if (isMobile) {
-      setIsMobileMenuOpen(!isMobileMenuOpen);
-    }
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   const closeMobileMenu = () => {
@@ -428,6 +422,7 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({ className }) => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
+                onClick={navigateToHome}
               >
                 <img 
                   src="/images/laredo-medical-logo.svg" 
@@ -445,7 +440,7 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({ className }) => {
 
                 <NavLinks>
                   <NavLink 
-                    onClick={() => scrollToSection('hero')}
+                    onClick={navigateToHome}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -453,7 +448,7 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({ className }) => {
                   </NavLink>
                   
                   <NavLink 
-                    onClick={() => scrollToSection('services')}
+                    onClick={() => navigateToHomeWithSection('services')}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -461,7 +456,7 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({ className }) => {
                   </NavLink>
                   
                   <NavLink 
-                    onClick={() => scrollToSection('blog')}
+                    onClick={() => navigateToHomeWithSection('blog')}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -469,7 +464,7 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({ className }) => {
                   </NavLink>
                   
                   <NavLink 
-                    onClick={() => scrollToSection('about')}
+                    onClick={() => navigateToHomeWithSection('about')}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -477,7 +472,7 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({ className }) => {
                   </NavLink>
                   
                   <NavLink 
-                    onClick={() => scrollToSection('contact')}
+                    onClick={() => navigateToHomeWithSection('contact')}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -529,4 +524,4 @@ const ModernHeader: React.FC<ModernHeaderProps> = ({ className }) => {
   );
 };
 
-export default ModernHeader;
+export default PolicyHeader; 

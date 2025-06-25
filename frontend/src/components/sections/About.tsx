@@ -208,41 +208,101 @@ const LocationCard = styled(motion.div)`
 `;
 
 const AccreditationBadges = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-lg);
-  justify-content: center;
-  margin-top: var(--space-3xl);
-  padding: var(--space-2xl);
-  background: var(--color-gray-50);
-  border-radius: var(--radius-xl);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-xl);
+  margin-top: var(--space-4xl);
+  padding: var(--space-3xl);
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--color-gray-200);
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-lg);
+    padding: var(--space-xl);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
 `;
 
 const Badge = styled(motion.div)`
-  background: var(--color-white);
-  padding: var(--space-lg);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  border: 2px solid var(--color-primary-blue-light);
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  padding: var(--space-xl);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 2px solid transparent;
   text-align: center;
-  min-width: 120px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.6s;
+  }
 
   .badge-icon {
-    font-size: var(--font-size-2xl);
-    margin-bottom: var(--space-sm);
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--space-md);
     display: block;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    transition: transform 0.3s ease;
+
+    @media (max-width: 768px) {
+      font-size: var(--font-size-2xl);
+      margin-bottom: var(--space-sm);
+    }
   }
 
   .badge-text {
-    font-size: var(--font-size-sm);
-    color: var(--color-primary-blue-dark);
+    font-size: var(--font-size-base);
+    color: var(--color-gray-800);
     font-weight: var(--font-weight-semibold);
     line-height: var(--line-height-tight);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+
+    @media (max-width: 768px) {
+      font-size: var(--font-size-sm);
+    }
   }
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+    border-color: var(--color-primary-blue-light);
+    background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+
+    &::before {
+      left: 100%;
+    }
+
+    .badge-icon {
+      transform: scale(1.1);
+    }
+
+    .badge-text {
+      color: var(--color-primary-blue-dark);
+      opacity: 1;
+    }
+  }
+
+  &:focus {
+    outline: 3px solid var(--color-primary-blue-light);
+    outline-offset: 4px;
   }
 `;
 
@@ -264,11 +324,11 @@ const About: React.FC = () => {
   ];
 
   const accreditations = [
-    { icon: '🏥', text: 'State Licensed' },
-    { icon: '✅', text: 'Board Certified' },
-    { icon: '🔒', text: 'HIPAA Compliant' },
-    { icon: '⭐', text: 'Accredited Facility' },
-    { icon: '🌟', text: 'Quality Certified' },
+    { icon: '✅', text: 'State Licensed' },
+    { icon: '🔒', text: 'Board Certified' },
+    { icon: '⭐', text: 'HIPAA Compliant' },
+    { icon: '🌟', text: 'Accredited Facility' },
+    { icon: '🏆', text: 'Quality Certified' },
     { icon: '🛡️', text: 'Insured Practice' }
   ];
 

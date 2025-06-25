@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { HelmetProvider } from 'react-helmet-async';
 import './styles/globals.css';
@@ -20,13 +21,19 @@ import StructuredData from './components/seo/StructuredData';
 
 // Pages
 import LegalPage from './pages/LegalPage';
+import MedicalDisclaimerPage from './pages/MedicalDisclaimerPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import HipaaNoticePage from './pages/HipaaNoticePage';
+import TermsOfServicePage from './pages/TermsOfServicePage';
 
 // Hooks
 import { useSEO } from './hooks/useSEO';
 
-const App: React.FC = () => {
+// Main content component
+const MainContent: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const { i18n } = useTranslation();
-  const [currentPage, setCurrentPage] = useState<string>('home');
   const [legalPageType, setLegalPageType] = useState<string>('');
 
   // SEO setup
@@ -43,6 +50,53 @@ const App: React.FC = () => {
     lang: i18n.language
   });
 
+  // Navigation handler for React Router
+  const handleNavigation = (page: string, pageType?: string) => {
+    if (page === 'home') {
+      navigate('/');
+    } else if (page === 'legal') {
+      setLegalPageType(pageType || '');
+      // Keep old legal page functionality
+    } else {
+      navigate(`/${page}`);
+    }
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleNavigateHome = () => {
+    navigate('/');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  return (
+    <Routes>
+      <Route path="/" element={
+        <>
+          <ModernHeader />
+          <main id="main-content" role="main">
+            <ModernHero />
+            <Services />
+            <Blog />
+            <FAQ />
+            <About />
+            <Contact />
+          </main>
+          <Footer onNavigate={handleNavigation} />
+        </>
+      } />
+      <Route path="/medical-disclaimer" element={<MedicalDisclaimerPage onNavigateHome={handleNavigateHome} />} />
+      <Route path="/privacy-policy" element={<PrivacyPolicyPage onNavigateHome={handleNavigateHome} />} />
+      <Route path="/hipaa-notice" element={<HipaaNoticePage onNavigateHome={handleNavigateHome} />} />
+      <Route path="/terms-of-service" element={<TermsOfServicePage onNavigateHome={handleNavigateHome} />} />
+      <Route path="/legal" element={<LegalPage page={legalPageType} onNavigateHome={handleNavigateHome} />} />
+    </Routes>
+  );
+};
+
+const App: React.FC = () => {
+  const { i18n } = useTranslation();
+
   // Language persistence
   useEffect(() => {
     const handleLanguageChange = (lang: string) => {
@@ -57,39 +111,6 @@ const App: React.FC = () => {
       i18n.off('languageChanged', handleLanguageChange);
     };
   }, [i18n]);
-
-  // Simple navigation handler
-  const handleNavigation = (page: string, pageType?: string) => {
-    setCurrentPage(page);
-    if (pageType) {
-      setLegalPageType(pageType);
-    }
-    // Scroll to top
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const renderPage = () => {
-    if (currentPage === 'legal') {
-      return <LegalPage page={legalPageType} onNavigateHome={() => handleNavigation('home')} />;
-    }
-
-    return (
-      <>
-        <ModernHeader />
-        
-        <main id="main-content" role="main">
-          <ModernHero />
-          <Services />
-          <Blog />
-          <FAQ />
-          <About />
-          <Contact />
-        </main>
-        
-        <Footer onNavigate={handleNavigation} />
-      </>
-    );
-  };
 
   // Local Business Structured Data
   const localBusinessData = {
@@ -128,38 +149,40 @@ const App: React.FC = () => {
 
   return (
     <HelmetProvider>
-      <div className="App">
-        {/* SEO Head with enhanced meta tags */}
-        <SEOHead
-          title={i18n.language === 'es' 
-            ? 'Centro Médico de Accidentes Automovilísticos de Laredo - Tratamiento Experto'
-            : 'Car Accident Doctor Laredo TX | Chiropractic Care & Pain Management | LOP Accepted'
-          }
-          description={i18n.language === 'es'
-            ? 'Centro médico especializado en tratamiento de lesiones por accidentes automovilísticos en Laredo, TX. Atención quiropráctica, manejo del dolor e imágenes diagnósticas. Personal bilingüe. Llame (956) 333-2727.'
-            : 'Expert car accident treatment in Laredo, Texas. Comprehensive chiropractic care, pain management & diagnostic imaging. Letter of Protection accepted. Bilingual staff. Call (956) 333-2727 for immediate care.'
-          }
-          keywords={i18n.language === 'es'
-            ? 'doctor accidentes automovilísticos Laredo, tratamiento lesiones auto Laredo, quiropráctico accidentes Laredo, manejo dolor Laredo, LOP Laredo'
-            : 'car accident doctor Laredo, chiropractor Laredo TX, auto injury treatment Laredo, Letter of Protection Laredo, car accident clinic Webb County, bilingual car accident treatment'
-          }
-          canonical="/"
-          type="website"
-        />
-        
-        {/* Local Business Structured Data */}
-        <StructuredData type="localBusiness" data={localBusinessData} />
-        
-        {/* Skip Links for Accessibility */}
-        <a href="#main-content" className="skip-link">
-          {i18n.language === 'es' ? 'Saltar al contenido principal' : 'Skip to main content'}
-        </a>
-        <a href="#navigation" className="skip-link">
-          {i18n.language === 'es' ? 'Saltar a la navegación' : 'Skip to navigation'}
-        </a>
+      <Router>
+        <div className="App">
+          {/* SEO Head with enhanced meta tags */}
+          <SEOHead
+            title={i18n.language === 'es' 
+              ? 'Centro Médico de Accidentes Automovilísticos de Laredo - Tratamiento Experto'
+              : 'Car Accident Doctor Laredo TX | Chiropractic Care & Pain Management | LOP Accepted'
+            }
+            description={i18n.language === 'es'
+              ? 'Centro médico especializado en tratamiento de lesiones por accidentes automovilísticos en Laredo, TX. Atención quiropráctica, manejo del dolor e imágenes diagnósticas. Personal bilingüe. Llame (956) 333-2727.'
+              : 'Expert car accident treatment in Laredo, Texas. Comprehensive chiropractic care, pain management & diagnostic imaging. Letter of Protection accepted. Bilingual staff. Call (956) 333-2727 for immediate care.'
+            }
+            keywords={i18n.language === 'es'
+              ? 'doctor accidentes automovilísticos Laredo, tratamiento lesiones auto Laredo, quiropráctico accidentes Laredo, manejo dolor Laredo, LOP Laredo'
+              : 'car accident doctor Laredo, chiropractor Laredo TX, auto injury treatment Laredo, Letter of Protection Laredo, car accident clinic Webb County, bilingual car accident treatment'
+            }
+            canonical="/"
+            type="website"
+          />
+          
+          {/* Local Business Structured Data */}
+          <StructuredData type="localBusiness" data={localBusinessData} />
+          
+          {/* Skip Links for Accessibility */}
+          <a href="#main-content" className="skip-link">
+            {i18n.language === 'es' ? 'Saltar al contenido principal' : 'Skip to main content'}
+          </a>
+          <a href="#navigation" className="skip-link">
+            {i18n.language === 'es' ? 'Saltar a la navegación' : 'Skip to navigation'}
+          </a>
 
-        {renderPage()}
-      </div>
+          <MainContent />
+        </div>
+      </Router>
     </HelmetProvider>
   );
 };

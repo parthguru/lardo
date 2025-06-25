@@ -227,10 +227,17 @@ const CTAButton = styled.button`
   cursor: pointer;
   transition: all var(--transition-fast);
   width: 100%;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
 
   &:hover {
     background: var(--color-primary-blue-dark);
     transform: translateY(-2px);
+    text-decoration: none;
   }
 
   &:focus {
@@ -239,11 +246,33 @@ const CTAButton = styled.button`
   }
 
   &.emergency {
-    background: var(--color-accent-orange);
+    background: linear-gradient(135deg, #FF6B35 0%, #e55a2b 100%);
+    color: var(--color-white);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
     &:hover {
-      background: #e55a2b;
+      background: linear-gradient(135deg, #e55a2b 0%, #d14d26 100%);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      text-decoration: none;
+      color: var(--color-white);
     }
+
+    &:active {
+      transform: translateY(-1px);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  /* When used as anchor link */
+  &[href] {
+    border: none;
+    outline: none;
+  }
+
+  @media (max-width: 768px) {
+    padding: var(--space-md) var(--space-lg);
+    font-size: var(--font-size-base);
   }
 `;
 

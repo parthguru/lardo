@@ -130,6 +130,10 @@ const EmergencyContact = styled.div`
   a {
     color: inherit;
     text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 
   @media (max-width: 768px) {
@@ -150,7 +154,11 @@ const LanguageToggle = styled.button`
   transition: all var(--transition-fast);
 
   &:hover {
-    background: var(--color-primary-blue-dark);
+    background: var(--color-white);
+    color: var(--color-primary-blue);
+    border: 2px solid var(--color-primary-blue);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
   &:focus {
@@ -191,7 +199,7 @@ const TopBar = styled.div`
     font-weight: var(--font-weight-semibold);
 
     &:hover {
-      text-decoration: underline;
+      text-decoration: none;
     }
   }
 `;

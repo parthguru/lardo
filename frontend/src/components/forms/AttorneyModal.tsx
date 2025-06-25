@@ -4,14 +4,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 import { useMultiStepForm } from '../../hooks/useMultiStepForm';
 
-// Reusing styled components from PatientModal for consistency
+// Reusing modern styled components from PatientModal for consistency
 const ModalOverlay = styled(motion.div)`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 20, 40, 0.8);
+  backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,39 +21,61 @@ const ModalOverlay = styled(motion.div)`
 `;
 
 const ModalContent = styled(motion.div)`
-  background: var(--color-white);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-xl);
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-radius: 24px;
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.8);
   width: 100%;
-  max-width: 600px;
+  max-width: 800px;
   max-height: 90vh;
-  overflow-y: auto;
+  overflow: hidden;
   position: relative;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 768px) {
+    max-height: 95vh;
+    margin: var(--space-sm);
+    max-width: calc(100vw - var(--space-lg));
+    border-radius: 20px;
+  }
 `;
 
 const ModalHeader = styled.div`
-  padding: var(--space-2xl);
-  border-bottom: 1px solid var(--color-gray-200);
-  position: sticky;
-  top: 0;
-  background: var(--color-white);
-  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-  z-index: 1;
+  padding: var(--space-2xl) var(--space-2xl) var(--space-xl);
+  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+    opacity: 0.3;
+  }
 
   h2 {
-    font-size: var(--font-size-2xl);
-    color: var(--color-primary-blue-dark);
+    font-size: clamp(var(--font-size-xl), 4vw, var(--font-size-3xl));
+    color: white;
     margin: 0 0 var(--space-sm) 0;
-
-    @media (max-width: 768px) {
-      font-size: var(--font-size-xl);
-    }
+    font-weight: var(--font-weight-bold);
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   p {
-    color: var(--color-gray-700);
+    color: rgba(255, 255, 255, 0.9);
     margin: 0;
     font-size: var(--font-size-base);
+    position: relative;
+    z-index: 1;
+    line-height: var(--line-height-relaxed);
   }
 `;
 
@@ -60,110 +83,184 @@ const CloseButton = styled.button`
   position: absolute;
   top: var(--space-lg);
   right: var(--space-lg);
-  background: none;
-  border: none;
-  font-size: var(--font-size-2xl);
-  color: var(--color-gray-500);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  font-size: 24px;
+  color: white;
   cursor: pointer;
-  padding: var(--space-sm);
-  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all var(--transition-fast);
+  z-index: 2;
 
   &:hover {
-    background: var(--color-gray-100);
-    color: var(--color-gray-700);
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
   }
 
   &:focus {
-    outline: 2px solid var(--color-focus);
+    outline: 2px solid rgba(255, 255, 255, 0.6);
     outline-offset: 2px;
   }
 `;
 
 const ProgressBar = styled.div`
   display: flex;
+  justify-content: center;
+  margin: var(--space-xl) var(--space-2xl) var(--space-2xl);
+  position: relative;
+`;
+
+const ProgressTrack = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #e2e8f0 0%, #cbd5e1 100%);
+  border-radius: 2px;
+  transform: translateY(-50%);
+  z-index: 0;
+`;
+
+const ProgressFill = styled(motion.div)<{ progress: number }>`
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #7c3aed 0%, #a855f7 100%);
+  border-radius: 2px;
+  transform: translateY(-50%);
+  z-index: 1;
+  width: ${props => props.progress}%;
+`;
+
+const ProgressSteps = styled.div`
+  display: flex;
   justify-content: space-between;
-  margin-bottom: var(--space-xl);
-  padding: 0 var(--space-lg);
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  z-index: 2;
 `;
 
 const ProgressStep = styled.div<{ active: boolean; completed: boolean }>`
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: var(--space-sm);
-  flex: 1;
-  position: relative;
-
-  &:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: calc(-50% + 16px);
-    left: calc(50% + 16px);
-    height: 2px;
-    background: ${props => props.completed ? 'var(--color-accent-green)' : 'var(--color-gray-300)'};
-    transform: translateY(-50%);
-    z-index: 0;
-  }
 
   .step-circle {
-    width: 32px;
-    height: 32px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: var(--font-weight-bold);
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-base);
+    transition: all var(--transition-fast);
+    border: 3px solid;
     position: relative;
-    z-index: 1;
-    background: ${props => 
-      props.completed ? 'var(--color-accent-green)' :
-      props.active ? 'var(--color-primary-blue)' : 'var(--color-gray-300)'
-    };
-    color: var(--color-white);
+    
+    ${props => {
+      if (props.completed) {
+        return `
+          background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+          border-color: #7c3aed;
+          color: white;
+          box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+        `;
+      } else if (props.active) {
+        return `
+          background: linear-gradient(135deg, #a855f7 0%, #c084fc 100%);
+          border-color: #a855f7;
+          color: white;
+          box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+        `;
+      } else {
+        return `
+          background: white;
+          border-color: #e2e8f0;
+          color: #64748b;
+        `;
+      }
+    }}
   }
 
   .step-label {
     font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-semibold);
+    text-align: center;
+    transition: color var(--transition-fast);
+    
     color: ${props => 
-      props.active ? 'var(--color-primary-blue)' : 
-      props.completed ? 'var(--color-accent-green)' : 'var(--color-gray-500)'
+      props.active ? '#7c3aed' : 
+      props.completed ? '#a855f7' : '#64748b'
     };
 
-    @media (max-width: 768px) {
-      display: none;
+    @media (max-width: 640px) {
+      font-size: var(--font-size-xs);
     }
   }
 `;
 
 const ModalBody = styled.div`
-  padding: var(--space-2xl);
+  padding: 0 var(--space-2xl) var(--space-xl);
+  overflow-y: auto;
+  flex: 1;
+
+  @media (max-width: 768px) {
+    padding: 0 var(--space-lg) var(--space-lg);
+  }
 `;
 
 const FormSection = styled.div`
+  margin-bottom: var(--space-2xl);
+  
   .form-title {
-    font-size: var(--font-size-xl);
-    color: var(--color-primary-blue-dark);
-    margin-bottom: var(--space-lg);
+    font-size: clamp(var(--font-size-lg), 3vw, var(--font-size-2xl));
+    background: linear-gradient(135deg, #581c87 0%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: var(--space-2xl);
     text-align: center;
-
-    @media (max-width: 768px) {
-      font-size: var(--font-size-lg);
-    }
+    font-weight: var(--font-weight-bold);
   }
 `;
 
 const FormGrid = styled.div`
   display: grid;
-  gap: var(--space-lg);
+  gap: var(--space-2xl);
+  margin-bottom: var(--space-2xl);
 
   &.two-column {
     grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
     
     @media (max-width: 768px) {
       grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
+  }
+
+  &.three-column {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+    
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
     }
   }
 `;
@@ -171,141 +268,293 @@ const FormGrid = styled.div`
 const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
 
   label {
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-semibold);
-    color: var(--color-gray-800);
+    color: #374151;
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
 
     .required {
-      color: var(--color-accent-orange);
-      margin-left: var(--space-xs);
+      color: #ef4444;
+      font-size: var(--font-size-lg);
+    }
+
+    .icon {
+      font-size: var(--font-size-lg);
+      opacity: 0.7;
     }
   }
 
   input, select, textarea {
-    padding: var(--space-md);
-    border: 2px solid var(--color-gray-300);
-    border-radius: var(--radius-md);
+    padding: var(--space-md) var(--space-lg);
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
     font-size: var(--font-size-base);
-    transition: border-color var(--transition-fast);
+    transition: all var(--transition-fast);
+    background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+    &::placeholder {
+      color: #9ca3af;
+    }
 
     &:focus {
       outline: none;
-      border-color: var(--color-primary-blue);
-      box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
+      border-color: #7c3aed;
+      background: white;
+      box-shadow: 
+        0 0 0 4px rgba(124, 58, 237, 0.1),
+        0 4px 12px rgba(0, 0, 0, 0.1);
+      transform: translateY(-1px);
     }
 
     &.error {
-      border-color: var(--color-accent-orange);
+      border-color: #ef4444;
+      box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
     }
   }
 
   textarea {
-    min-height: 100px;
+    min-height: 120px;
     resize: vertical;
+    line-height: var(--line-height-relaxed);
   }
 
   .error-message {
-    color: var(--color-accent-orange);
+    color: #ef4444;
     font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
     margin-top: var(--space-xs);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    background: #fef2f2;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: 8px;
+    border-left: 4px solid #ef4444;
+    animation: shake 0.5s ease-in-out;
+
+    &::before {
+      content: '⚠️';
+      font-size: var(--font-size-sm);
+    }
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+  }
+
+  .success-message {
+    color: #059669;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    margin-top: var(--space-xs);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    background: #f0fdf4;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: 8px;
+    border-left: 4px solid #059669;
+
+    &::before {
+      content: '✅';
+      font-size: var(--font-size-sm);
+    }
   }
 `;
 
 const RadioGroup = styled.div`
-  display: flex;
-  gap: var(--space-lg);
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
 
   label {
     display: flex;
     align-items: center;
     gap: var(--space-sm);
     cursor: pointer;
-    font-weight: var(--font-weight-normal);
+    font-weight: var(--font-weight-medium);
+    padding: var(--space-md);
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    transition: all var(--transition-fast);
+    background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+
+    &:hover {
+      border-color: #7c3aed;
+      background: #faf5ff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.1);
+    }
 
     input[type="radio"] {
-      width: auto;
+      width: 20px;
+      height: 20px;
       margin: 0;
+      accent-color: #7c3aed;
+    }
+
+    &:has(input:checked) {
+      border-color: #7c3aed;
+      background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+      color: #581c87;
+      font-weight: var(--font-weight-semibold);
     }
   }
 `;
 
 const CheckboxGroup = styled.div`
   display: grid;
-  gap: var(--space-sm);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
 
   label {
     display: flex;
     align-items: flex-start;
     gap: var(--space-sm);
     cursor: pointer;
-    font-weight: var(--font-weight-normal);
+    font-weight: var(--font-weight-medium);
     line-height: var(--line-height-normal);
+    padding: var(--space-sm) var(--space-md);
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    transition: all var(--transition-fast);
+    background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+
+    &:hover {
+      border-color: #7c3aed;
+      background: #faf5ff;
+      transform: translateY(-1px);
+    }
 
     input[type="checkbox"] {
-      width: auto;
+      width: 18px;
+      height: 18px;
       margin: 0;
       margin-top: 2px;
+      accent-color: #7c3aed;
+    }
+
+    &:has(input:checked) {
+      border-color: #7c3aed;
+      background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+      color: #581c87;
     }
   }
 `;
 
 const ModalFooter = styled.div`
   padding: var(--space-xl) var(--space-2xl);
-  border-top: 1px solid var(--color-gray-200);
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-top: 1px solid #e2e8f0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: var(--space-md);
 
   @media (max-width: 768px) {
+    flex-direction: column;
+    padding: var(--space-lg);
+  }
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  gap: var(--space-md);
+
+  @media (max-width: 768px) {
+    width: 100%;
     flex-direction: column;
   }
 `;
 
 const Button = styled.button<{ variant?: 'primary' | 'secondary' | 'danger' }>`
   padding: var(--space-md) var(--space-xl);
-  border-radius: var(--radius-md);
+  border-radius: 12px;
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
   cursor: pointer;
   transition: all var(--transition-fast);
   border: 2px solid;
+  min-width: 120px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s;
+  }
+
+  &:hover::before {
+    left: 100%;
+  }
 
   ${props => {
     switch (props.variant) {
       case 'primary':
         return `
-          background: var(--color-primary-blue);
-          color: var(--color-white);
-          border-color: var(--color-primary-blue);
+          background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+          color: white;
+          border-color: transparent;
+          box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
           
           &:hover:not(:disabled) {
-            background: var(--color-primary-blue-dark);
-            border-color: var(--color-primary-blue-dark);
+            background: linear-gradient(135deg, #6d28d9 0%, #9333ea 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4);
           }
         `;
       case 'danger':
         return `
-          background: var(--color-accent-orange);
-          color: var(--color-white);
-          border-color: var(--color-accent-orange);
+          background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+          color: white;
+          border-color: transparent;
+          box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
           
           &:hover:not(:disabled) {
-            background: #e55a2b;
-            border-color: #e55a2b;
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
           }
         `;
       default:
         return `
-          background: var(--color-white);
-          color: var(--color-primary-blue);
-          border-color: var(--color-primary-blue);
+          background: white;
+          color: #374151;
+          border-color: #d1d5db;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
           
           &:hover:not(:disabled) {
-            background: var(--color-primary-blue-light);
+            background: #f9fafb;
+            border-color: #9ca3af;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
           }
         `;
     }
@@ -314,15 +563,18 @@ const Button = styled.button<{ variant?: 'primary' | 'secondary' | 'danger' }>`
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
   }
 
   &:focus {
-    outline: 2px solid var(--color-focus);
+    outline: 2px solid #7c3aed;
     outline-offset: 2px;
   }
 
   @media (max-width: 768px) {
     width: 100%;
+    min-width: unset;
   }
 `;
 
@@ -394,8 +646,58 @@ const AttorneyModal: React.FC<AttorneyModalProps> = ({ onClose }) => {
 
   const updateField = (field: keyof AttorneyFormData, value: string | string[]) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+    
+    // Clear error immediately when user starts typing
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: '' }));
+    }
+
+    // Real-time validation for certain fields
+    if (typeof value === 'string' && value.trim()) {
+      const newErrors: Record<string, string> = { ...errors };
+      
+      switch (field) {
+        case 'email':
+          if (value.trim() && !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value.trim())) {
+            newErrors[field] = 'Please enter a valid email address';
+          } else {
+            delete newErrors[field];
+          }
+          break;
+        case 'phone':
+        case 'clientPhone':
+          if (value.trim() && !/^\(\d{3}\) \d{3}-\d{4}$/.test(value)) {
+            // Only show error if they've typed enough characters
+            if (value.replace(/\D/g, '').length >= 10) {
+              newErrors[field] = 'Please enter a valid phone number: (956) 123-4567';
+            } else {
+              delete newErrors[field];
+            }
+          } else {
+            delete newErrors[field];
+          }
+          break;
+        case 'attorneyName':
+        case 'clientName':
+          if (value.trim() && !/^[a-zA-ZÀ-ÿ\s.'-]+$/.test(value.trim())) {
+            newErrors[field] = 'Please enter a valid name (letters only)';
+          } else {
+            delete newErrors[field];
+          }
+          break;
+        case 'licenseNumber':
+          if (value.trim()) {
+            const digits = value.replace(/\D/g, '');
+            if (digits.length > 0 && digits.length !== 8) {
+              newErrors[field] = 'Texas State Bar license number should be 8 digits';
+            } else {
+              delete newErrors[field];
+            }
+          }
+          break;
+      }
+      
+      setErrors(newErrors);
     }
   };
 
@@ -404,22 +706,103 @@ const AttorneyModal: React.FC<AttorneyModalProps> = ({ onClose }) => {
 
     switch (currentStep) {
       case 1:
-        if (!formData.firmName.trim()) newErrors.firmName = t('forms.validation.required');
-        if (!formData.attorneyName.trim()) newErrors.attorneyName = t('forms.validation.required');
-        if (!formData.phone.trim()) newErrors.phone = t('forms.validation.required');
-        else if (!/^\(\d{3}\) \d{3}-\d{4}$/.test(formData.phone)) newErrors.phone = t('forms.validation.invalidPhone');
-        if (!formData.email.trim()) newErrors.email = t('forms.validation.required');
-        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = t('forms.validation.invalidEmail');
-        if (!formData.licenseNumber.trim()) newErrors.licenseNumber = t('forms.validation.required');
+        // Law firm name validation
+        if (!formData.firmName.trim()) {
+          newErrors.firmName = t('forms.validation.required');
+        } else if (formData.firmName.trim().length < 3) {
+          newErrors.firmName = 'Law firm name must be at least 3 characters';
+        }
+
+        // Attorney name validation
+        if (!formData.attorneyName.trim()) {
+          newErrors.attorneyName = t('forms.validation.required');
+        } else if (formData.attorneyName.trim().length < 2) {
+          newErrors.attorneyName = 'Attorney name must be at least 2 characters';
+        } else if (!/^[a-zA-ZÀ-ÿ\s.'-]+$/.test(formData.attorneyName.trim())) {
+          newErrors.attorneyName = 'Please enter a valid attorney name';
+        }
+
+        // Phone validation
+        if (!formData.phone.trim()) {
+          newErrors.phone = t('forms.validation.required');
+        } else if (!/^\(\d{3}\) \d{3}-\d{4}$/.test(formData.phone)) {
+          newErrors.phone = 'Please enter a valid phone number: (956) 123-4567';
+        }
+
+        // Email validation
+        if (!formData.email.trim()) {
+          newErrors.email = t('forms.validation.required');
+        } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email.trim())) {
+          newErrors.email = 'Please enter a valid email address';
+        }
+
+        // License number validation
+        if (!formData.licenseNumber.trim()) {
+          newErrors.licenseNumber = t('forms.validation.required');
+        } else if (!/^\d{8}$/.test(formData.licenseNumber.replace(/\D/g, ''))) {
+          newErrors.licenseNumber = 'Texas State Bar license number should be 8 digits';
+        }
         break;
+
       case 2:
-        if (!formData.clientName.trim()) newErrors.clientName = t('forms.validation.required');
-        if (!formData.clientPhone.trim()) newErrors.clientPhone = t('forms.validation.required');
-        else if (!/^\(\d{3}\) \d{3}-\d{4}$/.test(formData.clientPhone)) newErrors.clientPhone = t('forms.validation.invalidPhone');
-        if (!formData.accidentDate) newErrors.accidentDate = t('forms.validation.required');
+        // Client name validation
+        if (!formData.clientName.trim()) {
+          newErrors.clientName = t('forms.validation.required');
+        } else if (formData.clientName.trim().length < 2) {
+          newErrors.clientName = 'Client name must be at least 2 characters';
+        } else if (!/^[a-zA-ZÀ-ÿ\s.'-]+$/.test(formData.clientName.trim())) {
+          newErrors.clientName = 'Please enter a valid client name';
+        }
+
+        // Client phone validation
+        if (!formData.clientPhone.trim()) {
+          newErrors.clientPhone = t('forms.validation.required');
+        } else if (!/^\(\d{3}\) \d{3}-\d{4}$/.test(formData.clientPhone)) {
+          newErrors.clientPhone = 'Please enter a valid phone number: (956) 123-4567';
+        }
+
+        // Accident date validation
+        if (!formData.accidentDate) {
+          newErrors.accidentDate = t('forms.validation.required');
+        } else {
+          const accidentDate = new Date(formData.accidentDate);
+          const today = new Date();
+          const maxDate = new Date();
+          maxDate.setFullYear(today.getFullYear() - 10); // Not more than 10 years ago
+
+          if (accidentDate > today) {
+            newErrors.accidentDate = 'Accident date cannot be in the future';
+          } else if (accidentDate < maxDate) {
+            newErrors.accidentDate = 'Please contact us directly for accidents older than 10 years';
+          }
+        }
+
+        // Case number validation (if provided)
+        if (formData.caseNumber && formData.caseNumber.trim() && formData.caseNumber.trim().length < 3) {
+          newErrors.caseNumber = 'Please provide a valid case number';
+        }
         break;
+
       case 3:
-        if (formData.communicationPreferences.length === 0) newErrors.communicationPreferences = 'Please select at least one communication preference';
+        // Communication preferences validation
+        if (formData.communicationPreferences.length === 0) {
+          newErrors.communicationPreferences = 'Please select at least one communication preference';
+        }
+
+        // LOP request validation
+        if (!formData.lopRequest) {
+          newErrors.lopRequest = 'Please indicate if you are requesting LOP (Letter of Protection)';
+        }
+
+        // Reporting frequency validation
+        if (!formData.reportingFrequency) {
+          newErrors.reportingFrequency = 'Please select your preferred reporting frequency';
+        }
+
+        // Special instructions validation (if provided)
+        if (formData.specialInstructions && formData.specialInstructions.trim() && formData.specialInstructions.trim().length < 5) {
+          newErrors.specialInstructions = 'Please provide more detailed instructions (at least 5 characters)';
+        }
         break;
     }
 
@@ -474,20 +857,27 @@ const AttorneyModal: React.FC<AttorneyModalProps> = ({ onClose }) => {
   };
 
   const steps = [
-    { number: 1, label: 'Firm Info' },
+    { number: 1, label: 'Law Firm' },
     { number: 2, label: 'Client Info' },
-    { number: 3, label: 'Coordination' }
+    { number: 3, label: 'Preferences' }
   ];
+
+  const getStepProgress = () => {
+    return ((currentStep - 1) / (steps.length - 1)) * 100;
+  };
 
   const renderStep = () => {
     switch (currentStep) {
       case 1:
         return (
           <FormSection>
-            <h3 className="form-title">{t('forms.attorney.step1.title')}</h3>
+            <h3 className="form-title">
+              ⚖️ {t('forms.attorney.step1.title')}
+            </h3>
             
             <FormGroup>
               <label htmlFor="firmName">
+                <span className="icon">🏢</span>
                 {t('forms.attorney.step1.firmName')}
                 <span className="required">*</span>
               </label>
@@ -496,6 +886,7 @@ const AttorneyModal: React.FC<AttorneyModalProps> = ({ onClose }) => {
                 id="firmName"
                 value={formData.firmName}
                 onChange={(e) => updateField('firmName', e.target.value)}
+                placeholder="Enter your law firm name"
                 className={errors.firmName ? 'error' : ''}
               />
               {errors.firmName && <span className="error-message">{errors.firmName}</span>}
@@ -504,6 +895,7 @@ const AttorneyModal: React.FC<AttorneyModalProps> = ({ onClose }) => {
             <FormGrid className="two-column">
               <FormGroup>
                 <label htmlFor="attorneyName">
+                  <span className="icon">👨‍💼</span>
                   {t('forms.attorney.step1.attorneyName')}
                   <span className="required">*</span>
                 </label>
@@ -512,6 +904,7 @@ const AttorneyModal: React.FC<AttorneyModalProps> = ({ onClose }) => {
                   id="attorneyName"
                   value={formData.attorneyName}
                   onChange={(e) => updateField('attorneyName', e.target.value)}
+                  placeholder="Attorney's full name"
                   className={errors.attorneyName ? 'error' : ''}
                 />
                 {errors.attorneyName && <span className="error-message">{errors.attorneyName}</span>}
@@ -519,6 +912,7 @@ const AttorneyModal: React.FC<AttorneyModalProps> = ({ onClose }) => {
 
               <FormGroup>
                 <label htmlFor="licenseNumber">
+                  <span className="icon">🆔</span>
                   {t('forms.attorney.step1.licenseNumber')}
                   <span className="required">*</span>
                 </label>
@@ -526,8 +920,13 @@ const AttorneyModal: React.FC<AttorneyModalProps> = ({ onClose }) => {
                   type="text"
                   id="licenseNumber"
                   value={formData.licenseNumber}
-                  onChange={(e) => updateField('licenseNumber', e.target.value)}
-                  placeholder="TX Bar License Number"
+                  onChange={(e) => {
+                    // Format license number to only allow digits
+                    const digits = e.target.value.replace(/\D/g, '').slice(0, 8);
+                    updateField('licenseNumber', digits);
+                  }}
+                  placeholder="12345678 (8 digits)"
+                  maxLength={8}
                   className={errors.licenseNumber ? 'error' : ''}
                 />
                 {errors.licenseNumber && <span className="error-message">{errors.licenseNumber}</span>}
@@ -535,6 +934,7 @@ const AttorneyModal: React.FC<AttorneyModalProps> = ({ onClose }) => {
 
               <FormGroup>
                 <label htmlFor="phone">
+                  <span className="icon">📞</span>
                   {t('forms.attorney.step1.phone')}
                   <span className="required">*</span>
                 </label>
@@ -551,6 +951,7 @@ const AttorneyModal: React.FC<AttorneyModalProps> = ({ onClose }) => {
 
               <FormGroup>
                 <label htmlFor="email">
+                  <span className="icon">✉️</span>
                   {t('forms.attorney.step1.email')}
                   <span className="required">*</span>
                 </label>
@@ -559,6 +960,7 @@ const AttorneyModal: React.FC<AttorneyModalProps> = ({ onClose }) => {
                   id="email"
                   value={formData.email}
                   onChange={(e) => updateField('email', e.target.value)}
+                  placeholder="attorney@lawfirm.com"
                   className={errors.email ? 'error' : ''}
                 />
                 {errors.email && <span className="error-message">{errors.email}</span>}
@@ -570,11 +972,14 @@ const AttorneyModal: React.FC<AttorneyModalProps> = ({ onClose }) => {
       case 2:
         return (
           <FormSection>
-            <h3 className="form-title">{t('forms.attorney.step2.title')}</h3>
+            <h3 className="form-title">
+              👥 {t('forms.attorney.step2.title')}
+            </h3>
             
             <FormGrid className="two-column">
               <FormGroup>
                 <label htmlFor="clientName">
+                  <span className="icon">👤</span>
                   {t('forms.attorney.step2.clientName')}
                   <span className="required">*</span>
                 </label>
@@ -583,6 +988,7 @@ const AttorneyModal: React.FC<AttorneyModalProps> = ({ onClose }) => {
                   id="clientName"
                   value={formData.clientName}
                   onChange={(e) => updateField('clientName', e.target.value)}
+                  placeholder="Client's full name"
                   className={errors.clientName ? 'error' : ''}
                 />
                 {errors.clientName && <span className="error-message">{errors.clientName}</span>}
@@ -590,6 +996,7 @@ const AttorneyModal: React.FC<AttorneyModalProps> = ({ onClose }) => {
 
               <FormGroup>
                 <label htmlFor="clientPhone">
+                  <span className="icon">📱</span>
                   {t('forms.attorney.step2.clientPhone')}
                   <span className="required">*</span>
                 </label>
@@ -605,18 +1012,22 @@ const AttorneyModal: React.FC<AttorneyModalProps> = ({ onClose }) => {
               </FormGroup>
 
               <FormGroup>
-                <label htmlFor="caseNumber">{t('forms.attorney.step2.caseNumber')}</label>
+                <label htmlFor="caseNumber">
+                  <span className="icon">📋</span>
+                  {t('forms.attorney.step2.caseNumber')}
+                </label>
                 <input
                   type="text"
                   id="caseNumber"
                   value={formData.caseNumber}
                   onChange={(e) => updateField('caseNumber', e.target.value)}
-                  placeholder="Internal case reference"
+                  placeholder="Internal case reference number"
                 />
               </FormGroup>
 
               <FormGroup>
                 <label htmlFor="accidentDate">
+                  <span className="icon">📅</span>
                   {t('forms.attorney.step2.accidentDate')}
                   <span className="required">*</span>
                 </label>
@@ -632,24 +1043,27 @@ const AttorneyModal: React.FC<AttorneyModalProps> = ({ onClose }) => {
             </FormGrid>
 
             <FormGroup>
-              <label>{t('forms.attorney.step2.documentation')}</label>
+              <label>
+                <span className="icon">📄</span>
+                {t('forms.attorney.step2.documentation')}
+              </label>
               <CheckboxGroup>
                 {[
-                  'Police Report',
-                  'Insurance Claim',
-                  'Medical Records',
-                  'Witness Statements',
-                  'Photos/Videos',
-                  'Property Damage Estimate',
-                  'Employment Records'
+                  { value: 'Police Report', icon: '👮‍♂️' },
+                  { value: 'Insurance Claim', icon: '🛡️' },
+                  { value: 'Medical Records', icon: '🏥' },
+                  { value: 'Witness Statements', icon: '👥' },
+                  { value: 'Photos/Videos', icon: '📸' },
+                  { value: 'Property Damage Estimate', icon: '🚗' },
+                  { value: 'Employment Records', icon: '💼' }
                 ].map((doc) => (
-                  <label key={doc}>
+                  <label key={doc.value}>
                     <input
                       type="checkbox"
-                      checked={formData.documentation.includes(doc)}
-                      onChange={(e) => handleArrayFieldChange('documentation', doc, e.target.checked)}
+                      checked={formData.documentation.includes(doc.value)}
+                      onChange={(e) => handleArrayFieldChange('documentation', doc.value, e.target.checked)}
                     />
-                    {doc}
+                    {doc.icon} {doc.value}
                   </label>
                 ))}
               </CheckboxGroup>
@@ -660,10 +1074,15 @@ const AttorneyModal: React.FC<AttorneyModalProps> = ({ onClose }) => {
       case 3:
         return (
           <FormSection>
-            <h3 className="form-title">{t('forms.attorney.step3.title')}</h3>
+            <h3 className="form-title">
+              🎯 {t('forms.attorney.step3.title')}
+            </h3>
             
             <FormGroup>
-              <label>{t('forms.attorney.step3.lopRequest')}</label>
+              <label>
+                <span className="icon">💰</span>
+                {t('forms.attorney.step3.lopRequest')}
+              </label>
               <RadioGroup>
                 <label>
                   <input
@@ -673,7 +1092,7 @@ const AttorneyModal: React.FC<AttorneyModalProps> = ({ onClose }) => {
                     checked={formData.lopRequest === 'yes'}
                     onChange={(e) => updateField('lopRequest', e.target.value)}
                   />
-                  Yes, LOP requested
+                  ✅ Yes, LOP requested
                 </label>
                 <label>
                   <input
@@ -683,13 +1102,16 @@ const AttorneyModal: React.FC<AttorneyModalProps> = ({ onClose }) => {
                     checked={formData.lopRequest === 'no'}
                     onChange={(e) => updateField('lopRequest', e.target.value)}
                   />
-                  No, client will pay directly
+                  💳 No, client will pay directly
                 </label>
               </RadioGroup>
             </FormGroup>
 
             <FormGroup>
-              <label>{t('forms.attorney.step3.reportingFrequency')}</label>
+              <label>
+                <span className="icon">📊</span>
+                {t('forms.attorney.step3.reportingFrequency')}
+              </label>
               <RadioGroup>
                 <label>
                   <input
@@ -699,7 +1121,7 @@ const AttorneyModal: React.FC<AttorneyModalProps> = ({ onClose }) => {
                     checked={formData.reportingFrequency === 'weekly'}
                     onChange={(e) => updateField('reportingFrequency', e.target.value)}
                   />
-                  Weekly updates
+                  🗓️ Weekly updates
                 </label>
                 <label>
                   <input
@@ -709,7 +1131,7 @@ const AttorneyModal: React.FC<AttorneyModalProps> = ({ onClose }) => {
                     checked={formData.reportingFrequency === 'biweekly'}
                     onChange={(e) => updateField('reportingFrequency', e.target.value)}
                   />
-                  Bi-weekly updates
+                  📅 Bi-weekly updates
                 </label>
                 <label>
                   <input
@@ -719,7 +1141,7 @@ const AttorneyModal: React.FC<AttorneyModalProps> = ({ onClose }) => {
                     checked={formData.reportingFrequency === 'monthly'}
                     onChange={(e) => updateField('reportingFrequency', e.target.value)}
                   />
-                  Monthly updates
+                  🗓️ Monthly updates
                 </label>
                 <label>
                   <input
@@ -729,32 +1151,33 @@ const AttorneyModal: React.FC<AttorneyModalProps> = ({ onClose }) => {
                     checked={formData.reportingFrequency === 'as-needed'}
                     onChange={(e) => updateField('reportingFrequency', e.target.value)}
                   />
-                  As needed
+                  📞 As needed
                 </label>
               </RadioGroup>
             </FormGroup>
 
             <FormGroup>
               <label>
+                <span className="icon">📞</span>
                 {t('forms.attorney.step3.communicationPreferences')}
                 <span className="required">*</span>
               </label>
               <CheckboxGroup>
                 {[
-                  'Email reports',
-                  'Phone consultations', 
-                  'Fax communications',
-                  'Online portal access',
-                  'Emergency contact availability',
-                  'Direct physician communication'
+                  { value: 'Email reports', icon: '📧' },
+                  { value: 'Phone consultations', icon: '📱' },
+                  { value: 'Fax communications', icon: '📠' },
+                  { value: 'Online portal access', icon: '💻' },
+                  { value: 'Emergency contact availability', icon: '🚨' },
+                  { value: 'Direct physician communication', icon: '👨‍⚕️' }
                 ].map((pref) => (
-                  <label key={pref}>
+                  <label key={pref.value}>
                     <input
                       type="checkbox"
-                      checked={formData.communicationPreferences.includes(pref)}
-                      onChange={(e) => handleArrayFieldChange('communicationPreferences', pref, e.target.checked)}
+                      checked={formData.communicationPreferences.includes(pref.value)}
+                      onChange={(e) => handleArrayFieldChange('communicationPreferences', pref.value, e.target.checked)}
                     />
-                    {pref}
+                    {pref.icon} {pref.value}
                   </label>
                 ))}
               </CheckboxGroup>
@@ -762,7 +1185,10 @@ const AttorneyModal: React.FC<AttorneyModalProps> = ({ onClose }) => {
             </FormGroup>
 
             <FormGroup>
-              <label htmlFor="specialInstructions">{t('forms.attorney.step3.specialInstructions')}</label>
+              <label htmlFor="specialInstructions">
+                <span className="icon">📝</span>
+                {t('forms.attorney.step3.specialInstructions')}
+              </label>
               <textarea
                 id="specialInstructions"
                 value={formData.specialInstructions}
