@@ -501,6 +501,7 @@ const Blog: React.FC = () => {
   const { t, i18n } = useTranslation();
   const { expandedArticles, searchTerm, categoryFilter, toggleArticle, setSearchTerm, setCategoryFilter } = useBlogExpansion();
   const [currentPage, setCurrentPage] = useState(1);
+  const [loadedArticles, setLoadedArticles] = useState<Map<string, any>>(new Map());
   const currentLang = i18n.language as 'en' | 'es';
 
   // Use the local blog data service
@@ -520,6 +521,32 @@ const Blog: React.FC = () => {
   React.useEffect(() => {
     setCurrentPage(1);
   }, [searchTerm, categoryFilter]);
+
+  // Load full article content when expanded
+  const loadArticleContent = async (articleId: string) => {
+    if (loadedArticles.has(articleId)) return;
+
+    try {
+      const article = articles.find(a => a.id === articleId);
+      if (!article) return;
+
+      const response = await fetch(`/data/articles/${article.slug}.json`);
+      if (response.ok) {
+        const fullArticle = await response.json();
+        setLoadedArticles(prev => new Map(prev).set(articleId, fullArticle));
+      }
+    } catch (error) {
+      console.error('Error loading article content:', error);
+    }
+  };
+
+  // Handle article expansion
+  const handleToggleArticle = async (articleId: string) => {
+    toggleArticle(articleId);
+    if (!expandedArticles.has(articleId)) {
+      await loadArticleContent(articleId);
+    }
+  };
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -686,7 +713,7 @@ const Blog: React.FC = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  <BlogHeader onClick={() => toggleArticle(article.id)}>
+                  <BlogHeader onClick={() => handleToggleArticle(article.id)}>
                     <span className="category">{article.category}</span>
                     <h3>{article.title[currentLang] || article.title.en}</h3>
                     <p>{article.excerpt[currentLang] || article.excerpt.en}</p>
@@ -701,7 +728,7 @@ const Blog: React.FC = () => {
                       className={expandedArticles.has(article.id) ? 'expanded' : ''}
                       onClick={(e) => {
                         e.stopPropagation();
-                        toggleArticle(article.id);
+                        handleToggleArticle(article.id);
                       }}
                       aria-expanded={expandedArticles.has(article.id)}
                       aria-label={`${expandedArticles.has(article.id) ? 'Collapse' : 'Expand'} article`}
@@ -720,7 +747,13 @@ const Blog: React.FC = () => {
                         transition={{ duration: 0.3 }}
                       >
                         <div className="content-text">
-                          <ReactMarkdown>{article.content[currentLang] || article.content.en}</ReactMarkdown>
+                          {(() => {
+                            const loadedArticle = loadedArticles.get(article.id);
+                            if (loadedArticle && loadedArticle.content) {
+                              return <ReactMarkdown>{loadedArticle.content[currentLang] || loadedArticle.content.en}</ReactMarkdown>;
+                            }
+                            return <div>Loading content...</div>;
+                          })()}
                         </div>
                       </BlogContent>
                     )}

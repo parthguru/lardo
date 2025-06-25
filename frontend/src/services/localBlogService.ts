@@ -56,6 +56,18 @@ const CATEGORIES = [
   { key: 'recovery', label: 'Recovery', color: '#DC2626', icon: '💪' }
 ];
 
+// Helper function to load full article content
+const loadFullArticle = async (slug: string): Promise<LocalArticle | null> => {
+  try {
+    const response = await fetch(`/data/articles/${slug}.json`);
+    if (!response.ok) return null;
+    return await response.json();
+  } catch (error) {
+    console.error('Error loading full article:', error);
+    return null;
+  }
+};
+
 export const useLocalBlogData = (options: UseBlogDataOptions = {}): BlogDataResult => {
   const {
     searchTerm = '',

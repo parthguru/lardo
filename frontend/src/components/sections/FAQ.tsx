@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Container } from '../common/UIComponents';
@@ -295,7 +294,7 @@ const fallbackFAQs: FAQItem[] = [
 const FAQ: React.FC = () => {
   const [openItems, setOpenItems] = useState<Set<string>>(new Set());
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [faqs, setFaqs] = useState<FAQItem[]>(fallbackFAQs);
+  const [faqs] = useState<FAQItem[]>(fallbackFAQs);
   const [loading, setLoading] = useState<boolean>(false);
 
   // Categories for filtering
@@ -327,32 +326,8 @@ const FAQ: React.FC = () => {
 
   // Try to load FAQs from Strapi (will fall back to static data if API fails)
   useEffect(() => {
-    const loadFAQs = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch('http://localhost:1337/api/faqs?populate=*');
-        if (response.ok) {
-          const data = await response.json();
-          if (data.data && data.data.length > 0) {
-            const strapiFAQs = data.data.map((item: any) => ({
-              id: item.id.toString(),
-              question: item.attributes.question,
-              answer: item.attributes.answer,
-              category: item.attributes.category || 'general'
-            }));
-            setFaqs(strapiFAQs);
-          }
-        }
-        // If API fails, we keep the fallback data
-      } catch (error) {
-        console.warn('Could not load FAQs from Strapi, using fallback data:', error);
-        // Keep fallback data
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadFAQs();
+    // Use static FAQ data instead of Strapi
+    setLoading(false);
   }, []);
 
   // Generate FAQ structured data
