@@ -7,6 +7,7 @@
     "build": "cd frontend && npm run build",
     "test": "cd frontend && npm test",
     "new-article": "node tools/create-article.js",
-    "batch-articles": "node tools/batch-articles.js"
+    "batch-articles": "node tools/batch-articles.js",
+    "generate-sitemap": "node tools/generate-sitemap.js"
   }
 }

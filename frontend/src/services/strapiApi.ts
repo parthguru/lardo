@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-// Always use fallback data - no backend needed
+// Load from local JSON files - no backend needed
 const STRAPI_BASE_URL = '';
 
 export interface StrapiArticle {
@@ -145,6 +145,7 @@ class StrapiApiService {
     sort?: string;
   } = {}): Promise<{ articles: BlogArticle[]; total: number; page: number; pageSize: number }> {
     const {
+      locale = 'en',
       search,
       category,
       featured,
@@ -153,74 +154,66 @@ class StrapiApiService {
     } = params;
 
     try {
-      const response = await this.fetchFromStrapi('articles');
-      
-      // Handle Strapi v5 direct array response format
-      let articles: BlogArticle[];
-      let pagination = { total: 0, page: 1, pageSize: 10 };
-      
-      if (Array.isArray(response)) {
-        // Direct array response (your current format)
-        articles = response
-          .map(article => this.transformSimpleArticle(article))
-          .filter(article => {
-            // Filter by publishDate instead of publishedAt
-            const publishDate = new Date(article.publishDate);
-            const now = new Date();
-            return publishDate <= now; // Only show articles with publishDate in the past
-          });
-        
-        // Apply search filter
-        if (search) {
-          articles = articles.filter(article =>
-            article.title.toLowerCase().includes(search.toLowerCase()) ||
-            article.content.toLowerCase().includes(search.toLowerCase()) ||
-            article.preview.toLowerCase().includes(search.toLowerCase())
-          );
-        }
-
-        // Apply category filter
-        if (category && category !== 'all') {
-          articles = articles.filter(article =>
-            article.category.toLowerCase() === category.toLowerCase()
-          );
-        }
-
-        // Apply featured filter
-        if (featured !== undefined) {
-          // For your format, treat articles with featured=true as featured
-          articles = articles.filter(article => {
-            // Since we don't have featured field in the simple format, skip this filter
-            return true;
-          });
-        }
-
-        // Sort by publishDate
-        articles.sort((a, b) => 
-          new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
-        );
-
-        // Apply pagination
-        const startIndex = (page - 1) * pageSize;
-        const endIndex = startIndex + pageSize;
-        const paginatedArticles = articles.slice(startIndex, endIndex);
-        
-        pagination = { total: articles.length, page, pageSize };
-        articles = paginatedArticles;
-      } else if (response.data && Array.isArray(response.data)) {
-        // Strapi v5 standard format with data array
-        articles = response.data.map((article: any) => this.transformSimpleArticle(article));
-        pagination = response.meta?.pagination || pagination;
-      } else {
-        // Fallback
-        articles = [];
+      // Load from local JSON files instead of API
+      const response = await fetch('/data/articles/index.json');
+      if (!response.ok) {
+        throw new Error(`Failed to load articles: ${response.status}`);
       }
       
+      const data = await response.json();
+      const articlesData = data.articles || [];
+      
+      // Filter articles data first, then transform
+      let filteredArticlesData = articlesData.filter((article: any) => {
+        // Filter by publishDate
+        const publishDate = new Date(article.publishedAt || article.publishDate);
+        const now = new Date();
+        return publishDate <= now; // Only show articles with publishDate in the past
+      });
+
+      // Apply featured filter
+      if (featured !== undefined) {
+        filteredArticlesData = filteredArticlesData.filter((article: any) => {
+          const isFeatured = article.featured === true;
+          return featured === isFeatured;
+        });
+      }
+
+      // Apply category filter
+      if (category && category !== 'all') {
+        filteredArticlesData = filteredArticlesData.filter((article: any) =>
+          article.category.toLowerCase() === category.toLowerCase()
+        );
+      }
+
+      // Transform articles to match BlogArticle interface
+      let articles: BlogArticle[] = filteredArticlesData
+        .map((article: any) => this.transformJsonArticle(article, locale));
+      
+      // Apply search filter (after transformation to search in localized content)
+      if (search) {
+        articles = articles.filter(article =>
+          article.title.toLowerCase().includes(search.toLowerCase()) ||
+          article.content.toLowerCase().includes(search.toLowerCase()) ||
+          article.preview.toLowerCase().includes(search.toLowerCase())
+        );
+      }
+
+      // Sort by publishDate
+      articles.sort((a, b) => 
+        new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
+      );
+
+      // Apply pagination
+      const startIndex = (page - 1) * pageSize;
+      const endIndex = startIndex + pageSize;
+      const paginatedArticles = articles.slice(startIndex, endIndex);
+      
       return {
-        articles,
-        total: pagination.total,
-        page: pagination.page,
-        pageSize: pagination.pageSize
+        articles: paginatedArticles,
+        total: articles.length,
+        page,
+        pageSize
       };
     } catch (error) {
       console.error('Error fetching articles:', error);
@@ -230,27 +223,14 @@ class StrapiApiService {
 
   async getArticleBySlug(slug: string, locale: string = 'en'): Promise<BlogArticle | null> {
     try {
-      const queryParams = {
-        locale,
-        status: 'published', // Use Strapi v5 status parameter
-        filters: {
-          slug: { $eq: slug }
-        },
-        populate: {
-          category: true,
-          author: true,
-          tags: true,
-          localizations: true
-        }
-      };
-
-      const response = await this.fetchFromStrapi('articles', queryParams);
-      
-      if (response.data && response.data.length > 0) {
-        return this.transformArticle(response.data[0]);
+      // Load individual article file
+      const response = await fetch(`/data/articles/${slug}.json`);
+      if (!response.ok) {
+        return null;
       }
       
-      return null;
+      const articleData = await response.json();
+      return this.transformJsonArticle(articleData, locale);
     } catch (error) {
       console.error('Error fetching article by slug:', error);
       return null;
@@ -299,6 +279,82 @@ class StrapiApiService {
     });
     
     return result.articles;
+  }
+
+  private async transformJsonArticleAsync(jsonArticle: any, locale: string = 'en', loadFullContent: boolean = false): Promise<BlogArticle> {
+    // Handle bilingual content
+    const getLocalizedText = (field: any): string => {
+      if (typeof field === 'string') return field;
+      if (typeof field === 'object' && field !== null) {
+        return field[locale] || field['en'] || '';
+      }
+      return '';
+    };
+
+    // Extract author name
+    const authorName = jsonArticle.author?.name || '';
+
+    // Load full content if requested and not already present
+    let content = getLocalizedText(jsonArticle.content);
+    if (loadFullContent && !content) {
+      try {
+        const response = await fetch(`/data/articles/${jsonArticle.id}.json`);
+        if (response.ok) {
+          const fullArticle = await response.json();
+          content = getLocalizedText(fullArticle.content);
+        }
+      } catch (error) {
+        console.warn(`Failed to load full content for article ${jsonArticle.id}:`, error);
+      }
+    }
+
+    return {
+      id: jsonArticle.id,
+      category: jsonArticle.category || 'Uncategorized',
+      title: getLocalizedText(jsonArticle.title),
+      preview: getLocalizedText(jsonArticle.excerpt),
+      content: content,
+      readingTime: jsonArticle.readTime || jsonArticle.readingTime || 1,
+      publishDate: jsonArticle.publishedAt || jsonArticle.publishDate || new Date().toISOString(),
+      author: authorName,
+      tags: Array.isArray(jsonArticle.tags?.[locale]) ? jsonArticle.tags[locale] : [],
+      seo: {
+        title: jsonArticle.seo?.[locale]?.title,
+        description: jsonArticle.seo?.[locale]?.description,
+        keywords: jsonArticle.seo?.[locale]?.keywords
+      }
+    };
+  }
+
+  private transformJsonArticle(jsonArticle: any, locale: string = 'en'): BlogArticle {
+    // Handle bilingual content
+    const getLocalizedText = (field: any): string => {
+      if (typeof field === 'string') return field;
+      if (typeof field === 'object' && field !== null) {
+        return field[locale] || field['en'] || '';
+      }
+      return '';
+    };
+
+    // Extract author name
+    const authorName = jsonArticle.author?.name || '';
+
+    return {
+      id: jsonArticle.id,
+      category: jsonArticle.category || 'Uncategorized',
+      title: getLocalizedText(jsonArticle.title),
+      preview: getLocalizedText(jsonArticle.excerpt),
+      content: getLocalizedText(jsonArticle.content) || 'Content will be loaded when expanded.',
+      readingTime: jsonArticle.readTime || jsonArticle.readingTime || 1,
+      publishDate: jsonArticle.publishedAt || jsonArticle.publishDate || new Date().toISOString(),
+      author: authorName,
+      tags: Array.isArray(jsonArticle.tags?.[locale]) ? jsonArticle.tags[locale] : [],
+      seo: {
+        title: jsonArticle.seo?.[locale]?.title,
+        description: jsonArticle.seo?.[locale]?.description,
+        keywords: jsonArticle.seo?.[locale]?.keywords
+      }
+    };
   }
 
   private transformArticle(strapiArticle: StrapiArticle): BlogArticle {

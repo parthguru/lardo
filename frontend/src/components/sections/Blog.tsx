@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 import { useBlogExpansion } from '../../hooks/useBlogExpansion';
-import { useBlogData } from '../../services/blogService';
+import { useLocalBlogData } from '../../services/localBlogService';
 
 const BlogSection = styled.section`
   padding: var(--space-20) 0;
@@ -498,12 +498,13 @@ const PaginationInfo = styled.span`
 const ARTICLES_PER_PAGE = 5;
 
 const Blog: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { expandedArticles, searchTerm, categoryFilter, toggleArticle, setSearchTerm, setCategoryFilter } = useBlogExpansion();
   const [currentPage, setCurrentPage] = useState(1);
+  const currentLang = i18n.language as 'en' | 'es';
 
-  // Use the new blog data service
-  const { articles, categories, loading, error, total } = useBlogData({
+  // Use the local blog data service
+  const { articles, categories, loading, error, total } = useLocalBlogData({
     searchTerm,
     categoryFilter,
     page: currentPage,
@@ -687,14 +688,14 @@ const Blog: React.FC = () => {
                 >
                   <BlogHeader onClick={() => toggleArticle(article.id)}>
                     <span className="category">{article.category}</span>
-                    <h3>{article.title}</h3>
-                    <p>{article.preview}</p>
+                    <h3>{article.title[currentLang] || article.title.en}</h3>
+                    <p>{article.excerpt[currentLang] || article.excerpt.en}</p>
                     <div className="meta">
                       <span className="reading-time">
-                        📖 {article.readingTime} min read
+                        📖 {article.readTime} min read
                       </span>
-                      <span>📅 {new Date(article.publishDate).toLocaleDateString()}</span>
-                      {article.author && <span>👩‍⚕️ {article.author}</span>}
+                      <span>📅 {new Date(article.publishedAt).toLocaleDateString()}</span>
+                      {article.author && <span>👨‍⚕️ {article.author.name}</span>}
                     </div>
                     <ExpandButton
                       className={expandedArticles.has(article.id) ? 'expanded' : ''}
@@ -719,7 +720,7 @@ const Blog: React.FC = () => {
                         transition={{ duration: 0.3 }}
                       >
                         <div className="content-text">
-                          <ReactMarkdown>{article.content}</ReactMarkdown>
+                          <ReactMarkdown>{article.content[currentLang] || article.content.en}</ReactMarkdown>
                         </div>
                       </BlogContent>
                     )}
