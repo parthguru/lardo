@@ -25,6 +25,7 @@ import MedicalDisclaimerPage from './pages/MedicalDisclaimerPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import HipaaNoticePage from './pages/HipaaNoticePage';
 import TermsOfServicePage from './pages/TermsOfServicePage';
+import NotFoundPage from './pages/NotFoundPage';
 
 // Hooks
 import { useSEO } from './hooks/useSEO';
@@ -90,6 +91,8 @@ const MainContent: React.FC = () => {
       <Route path="/hipaa-notice" element={<HipaaNoticePage onNavigateHome={handleNavigateHome} />} />
       <Route path="/terms-of-service" element={<TermsOfServicePage onNavigateHome={handleNavigateHome} />} />
       <Route path="/legal" element={<LegalPage page={legalPageType} onNavigateHome={handleNavigateHome} />} />
+      {/* 404 Catch-all route */}
+      <Route path="*" element={<NotFoundPage onNavigateHome={handleNavigateHome} />} />
     </Routes>
   );
 };

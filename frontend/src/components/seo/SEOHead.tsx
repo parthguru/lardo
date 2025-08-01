@@ -66,9 +66,23 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       <meta property="og:title" content={enhancedTitle} />
       <meta property="og:description" content={enhancedDescription} />
       <meta property="og:image" content={fullImage} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="Laredo Car Accident Medical Center - Expert Treatment" />
       <meta property="og:url" content={fullCanonical} />
       <meta property="og:site_name" content="Laredo Car Accident Medical Center" />
       <meta property="og:locale" content="en_US" />
+      <meta property="og:locale:alternate" content="es_MX" />
+      <meta property="fb:app_id" content="your-app-id" />
+      
+      {/* Social Media Business Info */}
+      <meta property="business:contact_data:street_address" content="8511 McPherson Road, Suite 208" />
+      <meta property="business:contact_data:locality" content="Laredo" />
+      <meta property="business:contact_data:region" content="TX" />
+      <meta property="business:contact_data:postal_code" content="78045" />
+      <meta property="business:contact_data:country_name" content="United States" />
+      <meta property="business:contact_data:phone_number" content="+19563332727" />
+      <meta property="business:contact_data:website" content="https://laredocaraccident.com" />
       
       {/* Article specific Open Graph tags */}
       {type === 'article' && articleData && (
@@ -96,6 +110,9 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       <meta name="twitter:title" content={enhancedTitle} />
       <meta name="twitter:description" content={enhancedDescription} />
       <meta name="twitter:image" content={fullImage} />
+      <meta name="twitter:image:alt" content="Laredo Car Accident Medical Center - Expert Treatment" />
+      <meta name="twitter:site" content="@laredo_car_accident" />
+      <meta name="twitter:creator" content="@laredo_car_accident" />
       
       {/* Business & Medical specific */}
       <meta name="rating" content="4.8" />

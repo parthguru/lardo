@@ -332,10 +332,10 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <h4>{t('footer.social.title')}</h4>
             <p>Connect with us on social media for health tips and updates.</p>
             <SocialLinks>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <a href="https://www.facebook.com/share/1Cttaowc2L/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook - Laredo Car Accident Medical Center">
                 <span className="icon">📘</span>
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <a href="https://instagram.com/laredo_car_accident" target="_blank" rel="noopener noreferrer" aria-label="Instagram - @laredo_car_accident">
                 <span className="icon">📷</span>
               </a>
               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
